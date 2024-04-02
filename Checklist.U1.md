@@ -32,6 +32,6 @@ werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfo
 - [ ] mindestens je ein Test für CRUD
 - [ ] mindestens zwei Tests mit Mockito
 - [ ] Einfügen der Kuchen vollständig implementiert und vollständig getestet
-- [ ] Unterstützung von mindestens zwei Kuchensorten
+- [x] Unterstützung von mindestens zwei Kuchensorten
 - [x] vollständige GL
 - [ ] keine Code-Duplikate

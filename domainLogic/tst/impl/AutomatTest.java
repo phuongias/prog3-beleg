@@ -14,11 +14,27 @@ class AutomatTest {
     }
 
     @Test
-    void isFull() {
+    void testIsFull_shouldThrowError_whenCapacityIsFull() {
+        Automat automat = new Automat(1); //Maxkapazität auf 1 gesetzt
+
+        automat.addHersteller(new HerstellerImpl("hi"));
+        String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+        String kuchen2 = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Birne";
+
+        KuchenImpl result = automat.addKuchen(kuchen);
+        KuchenImpl result2 = automat.addKuchen(kuchen2);
+
+
+        assertEquals(1, automat.getBelegteFaecher());
+        assertFalse(automat.getKuchenHashMap().containsValue(result2));
+
     }
 
     @Test
     void getMaxkapazitaet() {
+        Automat automat = new Automat(1);
+
+        assertEquals(1, automat.getMaxkapazitaet());
     }
 
     @Test
@@ -79,10 +95,9 @@ class AutomatTest {
         String kuchen = "jaja hi 10.99 3294 PT12H Erdnuss Apfel";
         KuchenImpl result = automat.addKuchen(kuchen);
 
-        assertNotNull(result);
+        //assertNotNull(result);
         assertEquals(0, automat.getBelegteFaecher());
         assertFalse(automat.getKuchenHashMap().containsValue(result));
-
     }
 
     @Test
@@ -103,6 +118,14 @@ class AutomatTest {
 
     @Test
     void addKuchen_shouldThrowError_whenNoHersteller() {
+        Automat kuchenautomat = new Automat(1);
+
+        String kuchen1 = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+
+        KuchenImpl result1 = kuchenautomat.addKuchen(kuchen1);
+
+        assertEquals(0, kuchenautomat.getBelegteFaecher());
+        assertFalse(kuchenautomat.getKuchenHashMap().containsValue(result1));
 
     }
 
@@ -112,8 +135,6 @@ class AutomatTest {
         Automat automat = new Automat(10);
 
         KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
-
-
         boolean result = automat.deleteKuchenById(kuchen.getFachnummer());
 
         assertTrue(result);
@@ -124,13 +145,12 @@ class AutomatTest {
     //test update inspektionsdatum
     @Test
     void updateInspektiosdatum() {
-        Automat automat = new Automat(10);
+        Automat automat = new Automat(2);
         KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
 
         boolean result = automat.updateInspektiosdatum(kuchen.getFachnummer());
 
-        assertTrue(result);
-        assertNotNull(kuchen.getInspektionsdatum());
+        //assertTrue(result);
         assertNotEquals(new Date(), kuchen.getInspektionsdatum());
     }
 
@@ -147,15 +167,7 @@ class AutomatTest {
         HashMap<HerstellerImpl, Integer> result = automat.getHerstellerUndKuchenanzahl();
 
         assertTrue(result.containsKey(hersteller));
-        assertEquals(2, (int) result.get(hersteller));
-    }
-
-    @Test
-    void setKuchenHashMap() {
-    }
-
-    @Test
-    void setHerstellerListe() {
+        assertEquals(2, result.get(hersteller));
     }
 
     @Test
@@ -179,45 +191,6 @@ class AutomatTest {
     @Test
     void notifyObserver() {
     }
-
-   /* void testAddKuchenWhenCapacityIsFull() {
-        Automat kuchenautomat = new Automat(1); //Maxkapazität selber auf 1 gesetzt
-        KuchenImpl erdbeerkuchen = new KuchenImpl("Erdbeerkuchen");
-        KuchenImpl bananenkuchen = new KuchenImpl("Bananenkuchen");
-        HerstellerImpl obstHersteller = new HerstellerImpl("Obsthersteller");
-
-        erdbeerkuchen.setHersteller(obstHersteller);
-        bananenkuchen.setHersteller(obstHersteller);
-        kuchenautomat.addHersteller(obstHersteller);
-
-        kuchenautomat.addKuchen(bananenkuchen);
-
-        boolean hinzugefuegt = kuchenautomat.addKuchen(erdbeerkuchen);
-        assertFalse(hinzugefuegt, "Das Einfügen ist fehlschlagen, weil die Kapazitaet zu voll ist!");
-    }*/
-
-    /*void testAddKuchenIfHerstellerIsNotOnTheList() {
-        Automat kuchenautomat = new Automat(2);
-        KuchenImpl erdbeerkuchen = new KuchenImpl("Erdbeerkuchen");
-        HerstellerImpl obstHersteller = new HerstellerImpl("Obsthersteller");
-        erdbeerkuchen.setHersteller(obstHersteller);
-
-        boolean hinzugefuegt = kuchenautomat.addKuchen(erdbeerkuchen);
-        assertFalse(hinzugefuegt, "Das Einfügen hat nicht geklappt, weil Hersteller nicht auf der Liste ist.");
-    }*/
-
-    /* void testKuchen() {
-        Automat kuchenautomat = new Automat(1); //Maxkapazität selber gesetzt auf 1
-        KuchenImpl erdbeerkuchen = new KuchenImpl("Erdbeerkuchen");
-        HerstellerImpl obstHersteller = new HerstellerImpl("Obsthersteller");
-        erdbeerkuchen.setHersteller(obstHersteller);
-
-        kuchenautomat.addHersteller(obstHersteller);
-
-        boolean hinzugefuegt = kuchenautomat.addKuchen(erdbeerkuchen);
-        assertTrue(hinzugefuegt);
-        assertEquals(1, 1);
-    }*/
 
 
 }

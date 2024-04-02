@@ -34,7 +34,7 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
-- [ ] Speichern und Laden der Geschäftslogik mit JOS und JBP
+- [x] Speichern und Laden der Geschäftslogik mit JOS und JBP
 - [ ] Stellvertreter-Tests für das Lesen und Schreiben aus/in Streams
-- [ ] Integration in CLI oder GUI
+- [x] Integration in CLI oder GUI
 - [ ] Architekturdiagramm

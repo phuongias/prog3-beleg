@@ -35,7 +35,7 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
 - [x] event-System für die Kommunikation vom CLI.CLI zur GL realisiert
-- [ ] Beobachter realisiert
+- [x] Beobachter realisiert
 - [x] event-System für die Kommunikation von der GL zum CLI.CLI realisiert
 - [ ] angemessene Aufzählungstypen verwendet
 - [ ] zwei Tests für Beobachter realisiert

@@ -6,6 +6,7 @@ import kuchen.Kuchen;
 import observerPattern.Observable;
 import observerPattern.Observer;
 
+import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.util.*;
 
@@ -102,13 +103,12 @@ public class Automat implements Serializable, Observable {
     }
 
 
-    /*public boolean checkHerstellerVorhanden(HerstellerImpl hersteller) {
-        if (!herstellerListe.contains(hersteller)) {
-            herstellerListe.add(hersteller);
+    public boolean checkHerstellerVorhanden(HerstellerImpl hersteller) {
+        if (herstellerListe.contains(hersteller)) {
             return true;
         }
         return false;
-    }*/
+    }
 
 
     //von CRUD -> CREATE
@@ -133,19 +133,22 @@ public class Automat implements Serializable, Observable {
         KuchenImpl kuchen = Parser.parseKuchenInfo(kuchenInfo);
 
 
-        int fachnummer = getNaechstFreieFachnummer();
-        if (fachnummer != -1) {
-            kuchenHashMap.put(fachnummer, kuchen);
-            kuchen.setFachnummer(fachnummer);
-            updateInspektiosdatum(fachnummer);
-            updateAllergenToList(kuchen);
+        if (checkHerstellerVorhanden(kuchen.getHersteller())) {
+            int fachnummer = getNaechstFreieFachnummer();
+            if (fachnummer != -1) {
+                kuchenHashMap.put(fachnummer, kuchen);
+                kuchen.setFachnummer(fachnummer);
+                updateInspektiosdatum(fachnummer);
+                updateAllergenToList(kuchen);
 
-            this.notifyObserver();
-            return kuchen;
+                this.notifyObserver();
+                return kuchen;
 
-        } else {
-            return null; //kein fach verfügbar
-        }
+            } else {
+                return null; //kein fach verfügbar
+            }
+
+        }return kuchen;
     }
 
 
@@ -162,7 +165,7 @@ public class Automat implements Serializable, Observable {
     synchronized public boolean deleteKuchenById(int fachnummer) {
         if (fachnummer >= 0 && kuchenHashMap.containsKey(fachnummer)) {
             KuchenImpl kuchen = kuchenHashMap.remove(fachnummer);
-            // Keine Verschiebung der Fachnummern der verbleibenden Kuchen
+            //Keine Verschiebung der Fachnummern der verbleibenden Kuchen
 
 
             this.notifyObserver();
@@ -183,7 +186,6 @@ public class Automat implements Serializable, Observable {
                 return true;
             } else {
                 return false;
-
             }
         }
         return false;
@@ -220,14 +222,6 @@ public class Automat implements Serializable, Observable {
         }
 
         return herstellerUndKuchenanzahlHashMap;
-    }
-
-    public void setKuchenHashMap(HashMap<Integer, KuchenImpl> kuchenHashMap) {
-        this.kuchenHashMap = kuchenHashMap;
-    }
-
-    public void setHerstellerListe(ArrayList<HerstellerImpl> herstellerListe) {
-        this.herstellerListe = herstellerListe;
     }
 
 

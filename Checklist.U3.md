@@ -33,7 +33,7 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
-- [ ] keine Verwendung von Thread.sleep o.Ä. bzw. nur mit 0-Werten
+- [x] keine Verwendung von Thread.sleep o.Ä. bzw. nur mit 0-Werten
 - [ ] Änderungen an der Geschäftslogik produzieren Ausgaben auf der Konsole
 - [ ] deterministische Funktionalität testbar
 - [ ] Simulation 2

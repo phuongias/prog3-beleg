@@ -20,13 +20,13 @@ public class CakeAddEventListener {
         String addedKuchen = event.getKuchenInfo();
         KuchenImpl createdKuchen = Parser.parseKuchenInfo(addedKuchen);
 
-        boolean checkHersteller = automat.getHerstellerListe().contains(createdKuchen.getHersteller());
+        /*boolean checkHersteller = automat.getHerstellerListe().contains(createdKuchen.getHersteller());*/
         //System.out.println(checkHersteller);
 
         if (automat.isFull()) {
             System.out.println("Automat ist voll. Kuchen kann nicht hinzugefügt werden!");
         } else {
-            if (checkHersteller) {
+            if (automat.checkHerstellerVorhanden(createdKuchen.getHersteller())) {
                 automat.addKuchen(addedKuchen);
                 if (createdKuchen != null) {
                     System.out.println("Kuchen wurde erfolgreich hinzugefügt!");

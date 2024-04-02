@@ -245,7 +245,7 @@ public class Console {
 
     private void handlePersistenzmodus() {
         System.out.println("Persistenzmodus ");
-        System.out.println(":saveJOS");
+        System.out.println("saveJOS");
         System.out.println("loadJOS");
         String innerChoice4 = scanner.nextLine();
         switch (innerChoice4) {

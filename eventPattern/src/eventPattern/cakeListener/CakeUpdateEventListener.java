@@ -15,7 +15,6 @@ public class CakeUpdateEventListener {
     }
 
 
-
     public void onEvent(CakeUpdateEvent event) {
 
         boolean updated = automat.updateInspektiosdatum(event.getId());

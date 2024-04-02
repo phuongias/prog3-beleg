@@ -16,5 +16,6 @@
     <orderEntry type="module" module-name="eventPattern" />
     <orderEntry type="module" module-name="console" />
     <orderEntry type="module" module-name="io" />
+    <orderEntry type="library" scope="TEST" name="mockito.core" level="project" />
   </component>
 </module>

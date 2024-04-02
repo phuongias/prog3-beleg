@@ -2,6 +2,7 @@ package impl;
 
 import kuchen.Kuchen;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -101,6 +102,19 @@ class AutomatTest {
     }
 
     @Test
+    void addKuchen_shouldSucessfully_whenHerstellerVorhanden_withMockito(){
+        HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
+        KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
+        Mockito.when(kuchenMock.getHersteller()).thenReturn(herstellerMock);
+
+        Automat automat = new Automat(2);
+        KuchenImpl result = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+
+        assertNull(result);
+
+    }
+
+    @Test
     void addKuchen_shouldNotAdd_whenAutomatIsFull() {
         Automat automat = new Automat(1);
         automat.addHersteller(new HerstellerImpl("hi"));
@@ -113,6 +127,20 @@ class AutomatTest {
         assertNotNull(result);
         assertEquals(1, automat.getBelegteFaecher());
         assertFalse(automat.getKuchenHashMap().containsValue(result2));
+    }
+
+    @Test
+    void addKuchen_shouldNotAdd_whenAutomatFull_withMockito(){
+
+        KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
+        Automat automat = new Automat(1);
+        automat.addHersteller(new HerstellerImpl("hi"));
+        String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+
+        KuchenImpl result = automat.addKuchen(kuchen);
+
+        assertNull(result);
+
 
     }
 
@@ -131,13 +159,13 @@ class AutomatTest {
 
     //test delete kuchen
     @Test
-    void deleteKuchenById() {
+    void deleteKuchenById_shouldThrowError_whenKuchenIsNotInAutomat() {
         Automat automat = new Automat(10);
 
         KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
         boolean result = automat.deleteKuchenById(kuchen.getFachnummer());
 
-        assertTrue(result);
+        assertFalse(result);
         assertEquals(0, automat.getBelegteFaecher());
         assertFalse(automat.getKuchenHashMap().containsValue(kuchen));
     }

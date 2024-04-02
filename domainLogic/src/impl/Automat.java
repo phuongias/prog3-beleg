@@ -6,7 +6,6 @@ import kuchen.Kuchen;
 import observerPattern.Observable;
 import observerPattern.Observer;
 
-import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.util.*;
 
@@ -144,11 +143,14 @@ public class Automat implements Serializable, Observable {
                 this.notifyObserver();
                 return kuchen;
 
+
             } else {
                 return null; //kein fach verfügbar
+
             }
 
-        }return kuchen;
+        }return null;
+
     }
 
 

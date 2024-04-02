@@ -21,6 +21,8 @@ import eventPattern.herstellerHandler.HerstellerReadEventHandler;
 import impl.Automat;
 import impl.HerstellerImpl;
 import impl.KuchenImpl;
+import io.JOS;
+
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -28,6 +30,9 @@ import java.util.Scanner;
 public class Console {
 
     private Automat automat;
+
+    private JOS jos;
+
 
     private CakeAddEventHandler cakeAddEventHandler;
     private CakeDeleteEventHandler cakeDeleteEventHandler;
@@ -239,8 +244,43 @@ public class Console {
     }
 
     private void handlePersistenzmodus() {
+        System.out.println("Persistenzmodus ");
+        System.out.println(":saveJOS");
+        System.out.println("loadJOS");
+        String innerChoice4 = scanner.nextLine();
+        switch (innerChoice4) {
+            case "saveJOS":
+                handleSaveJos();
+                break;
 
+            case "loadJOS":
+                handleLoadJos();
+                break;
+        }
     }
+
+
+
+    private void handleSaveJos() {
+        if (jos.saveDL(automat)) {
+            System.out.println("Automat erfolgreich gespeichert.");
+        } else {
+            System.out.println("Fehler beim Speichern des Automaten.");
+        }
+        System.out.println(automat.getKuchenHashMap());
+    }
+
+    private void handleLoadJos() {
+        Automat loadedAutomat = null;
+        try {
+            loadedAutomat = jos.loadDL();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(loadedAutomat.getKuchenHashMap());
+    }
+
 
     public void setCakeAddEventHandler(CakeAddEventHandler cakeAddEventHandler) {
         this.cakeAddEventHandler = cakeAddEventHandler;
@@ -278,3 +318,5 @@ public class Console {
         this.allergenNichtVorhandenListEventHandler = allergenNichtVorhandenListEventHandler;
     }
 }
+
+

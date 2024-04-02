@@ -1,5 +1,8 @@
 package client;
 
+import eventPattern.cakeEvents.CakeReadEvent;
+import eventPattern.cakeHandler.CakeReadEventHandler;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,6 +15,7 @@ public class TCPClient {
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private Socket clientSocket;
+    private CakeReadEventHandler cakeReadEventHandler;
 
     public TCPClient(int port) {
         try {
@@ -42,6 +46,10 @@ public class TCPClient {
             char sign = this.in.readChar();
             Object event = this.in.readObject();
             // Verarbeite das empfangene Event
+            if(cakeReadEventHandler != null){
+                cakeReadEventHandler.handle((CakeReadEvent) event);
+
+            }
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

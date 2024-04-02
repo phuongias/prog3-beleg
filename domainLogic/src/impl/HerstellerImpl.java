@@ -8,6 +8,7 @@ import java.util.Objects;
 public class HerstellerImpl implements Hersteller, Serializable {
 
     private String name;
+    private Integer kuchenAnzahl;
 
     public HerstellerImpl(String name) { //Konstrukor
         this.name = name;
@@ -40,5 +41,10 @@ public class HerstellerImpl implements Hersteller, Serializable {
     public String toString() {
         return this.name;
     }
+
+    public void setAnzahlKuchen(int anzahlKuchen) {
+        this.kuchenAnzahl = anzahlKuchen;
+    }
+
 
 }

@@ -10,17 +10,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import impl.Parser;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 
 
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 
-public class GuiController implements Initializable{
+public class GuiController implements Initializable {
 
     private Automat automat = new Automat(10);
 
@@ -63,7 +67,10 @@ public class GuiController implements Initializable{
     private TableView<HerstellerImpl> herstellerTableView;
 
     @FXML
-    private TableColumn<HerstellerImpl, String> herstellerNamenColumn;
+    private TableColumn<HerstellerImpl, Integer> herstellerNamenColumn;
+
+    @FXML
+    private TableColumn<HerstellerImpl, Integer> kuchenAnzahlColumn;
 
     @FXML
     ObservableList<KuchenImpl> kuchenObservableList = FXCollections.observableArrayList();
@@ -82,53 +89,113 @@ public class GuiController implements Initializable{
         kuchenHaltbarkeitColumn.setCellValueFactory(new PropertyValueFactory<KuchenImpl, Duration>("haltbarkeit"));
         kuchenInspektionsdatumColumn.setCellValueFactory(new PropertyValueFactory<KuchenImpl, Date>("inspektionsdatum"));
 
-        herstellerNamenColumn.setCellValueFactory(new PropertyValueFactory<HerstellerImpl, String>("name"));
+        herstellerNamenColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        kuchenAnzahlColumn.setCellValueFactory(new PropertyValueFactory<>("kuchenAnzahl"));
+
 
         herstellerTableView.setItems(herstellerObservableList);
         kuchenListTableView.setItems(kuchenObservableList); //die table view soll dann mit der Obersever liste verknüpft werden
 
+        // Drag-and-Drop für Kuchenliste
+        //Quelle:
+        kuchenListTableView.setRowFactory(tv -> {
+            TableRow<KuchenImpl> row = new TableRow<>();
 
+            row.setOnDragDetected(event -> {
+                if (!row.isEmpty()) {
+                    Integer index = row.getIndex();
+                    Dragboard dragboard = row.startDragAndDrop(TransferMode.MOVE);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(index.toString());
+                    dragboard.setContent(content);
+                    event.consume();
+                }
+            });
 
+            row.setOnDragOver(event -> {
+                Dragboard dragboard = event.getDragboard();
+                if (dragboard.hasString() && !row.isEmpty()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+                event.consume();
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard dragboard = event.getDragboard();
+                if (dragboard.hasString()) {
+                    int draggedIndex = Integer.parseInt(dragboard.getString());
+                    ObservableList<KuchenImpl> items = kuchenListTableView.getItems();
+                    KuchenImpl draggedItem = items.get(draggedIndex);
+                    KuchenImpl targetItem = items.get(row.getIndex());
+
+                    // Austausch der Fachnummern
+                    int tempFachnummer = draggedItem.getFachnummer();
+                    draggedItem.setFachnummer(targetItem.getFachnummer());
+                    targetItem.setFachnummer(tempFachnummer);
+
+                    kuchenListTableView.refresh(); // Aktualisierung der Anzeige nach dem Austausch
+
+                    event.setDropCompleted(true);
+                    event.consume();
+                }
+            });
+
+            return row;
+        });
 
     }
 
 
     //listHerstellerListButton eig auch nicht mehr notwendig (durch ObservableList)
-public void listHerstellerListButton(ActionEvent e) { //Quelle: https://www.youtube.com/watch?v=Pqfd4hoi5cc
-    List<HerstellerImpl> herstellerListe = automat.getHerstellerListe();
-        if (herstellerObservableList != null) {
+    public void listHerstellerListButton(ActionEvent e) { //Quelle: https://www.youtube.com/watch?v=Pqfd4hoi5cc
+
+        /*HashMap<HerstellerImpl, Integer> herstellerUndKuchenanzahl = automat.getHerstellerUndKuchenanzahl();
+
+        if (herstellerObservableList != null && !herstellerUndKuchenanzahl.isEmpty()) {
             herstellerObservableList.clear();
-            if (automat != null && herstellerListe != null) {
-                for (HerstellerImpl hersteller : herstellerListe) { //geht durch ganze herstellerliste um jeden hersteller aufzulisten
-                    herstellerTableView.getItems().add(hersteller); //https://stackoverflow.com/questions/72965755/how-to-save-and-load-a-listview-in-javafx
-                }
+            for (Map.Entry<HerstellerImpl, Integer> entry : herstellerUndKuchenanzahl.entrySet()) {
+                HerstellerImpl hersteller = entry.getKey();
+                int anzahlKuchen = entry.getValue();
+                hersteller.setAnzahlKuchen(anzahlKuchen);
+                herstellerObservableList.add(hersteller);
+            }
+        }*/
+
+        HashMap<HerstellerImpl, Integer> herstellerUndKuchenanzahl = automat.getHerstellerUndKuchenanzahl();
+
+        if (herstellerObservableList != null && !herstellerUndKuchenanzahl.isEmpty()) {
+            herstellerObservableList.clear();
+            for (Map.Entry<HerstellerImpl, Integer> entry : herstellerUndKuchenanzahl.entrySet()) {
+                HerstellerImpl hersteller = entry.getKey();
+                int anzahlKuchen = entry.getValue();
+                hersteller.setAnzahlKuchen(anzahlKuchen);
+                herstellerObservableList.add(hersteller);
             }
         }
     }
 
 
-
-public void listKuchenListButton(ActionEvent e) { //eigentlich nicht mehr notwendig, weil ersetzt durch ObservableList
+    public void listKuchenListButton(ActionEvent e) { //eigentlich nicht mehr notwendig, weil ersetzt durch ObservableList
         if (kuchenObservableList != null) {
             kuchenListTableView.getItems().clear(); //um "neue" liste zu generieren
             if (automat != null && automat.getKuchenHashMap() != null) {
                 for (Map.Entry<Integer, KuchenImpl> entry : automat.getKuchenHashMap().entrySet()) { //Quelle: https://sentry.io/answers/iterate-hashmap-java/
-                 //ODER AUCH MIT FOR EACH: automat.getKuchenHashMap().forEach((key, value) -> { https://stackoverflow.com/questions/4234985/how-to-for-each-the-hashmap
+                    //ODER AUCH MIT FOR EACH: automat.getKuchenHashMap().forEach((key, value) -> { https://stackoverflow.com/questions/4234985/how-to-for-each-the-hashmap
                     KuchenImpl kuchen = entry.getValue(); //nimmt nur das value auf
                     kuchenListTableView.getItems().add(kuchen);
-                    }
                 }
+            }
 
 
             kuchenObservableList.clear();
 
             if (automat != null && automat.getKuchenHashMap() != null) {
                 Collection<KuchenImpl> kuchenCollection = automat.getKuchenHashMap().values(); //alle kuchenobjekte aus der kuchenhashmap sollen rausgeholt werden und als collection abgespeichert werden
-                kuchenObservableList.addAll(kuchenCollection); //die ganzen kuchen sollen dann in die Oberserverliste hinzugeügt werden
+                kuchenObservableList.addAll(kuchenCollection); //die ganzen kuchen dann in observablelist
             }
         }
-    }
 
+    }
 
 
     public void deleteHerstellerButton(ActionEvent e) {
@@ -162,6 +229,8 @@ public void listKuchenListButton(ActionEvent e) { //eigentlich nicht mehr notwen
                 kuchenIdToDelete.clear();
             }
         }
+        listHerstellerListButton(null);
+
 
     }
 
@@ -179,6 +248,8 @@ public void listKuchenListButton(ActionEvent e) { //eigentlich nicht mehr notwen
                 kuchenInfo.clear();
             }
         }
+        listHerstellerListButton(null);
+
 
     }
 

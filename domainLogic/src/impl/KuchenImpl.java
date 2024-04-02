@@ -44,7 +44,7 @@ public abstract class KuchenImpl implements Kuchen, Verkaufsobjekt, Serializable
     }
 
 
-    void setFachnummer(int fachnummer) {
+    public void setFachnummer(int fachnummer) {
         this.fachnummer = fachnummer;
     }
 

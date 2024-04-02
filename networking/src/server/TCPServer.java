@@ -86,4 +86,20 @@ public class TCPServer {
             // Behandlung der IOException, falls erforderlich
         }
     }
+
+    public void setCakeAddEventHandler(CakeAddEventHandler cakeAddEventHandler) {
+        this.cakeAddEventHandler = cakeAddEventHandler;
+    }
+
+    public void setCakeDeleteEventHandler(CakeDeleteEventHandler cakeDeleteEventHandler) {
+        this.cakeDeleteEventHandler = cakeDeleteEventHandler;
+    }
+
+    public void setCakeReadEventHandler(CakeReadEventHandler cakeReadEventHandler) {
+        this.cakeReadEventHandler = cakeReadEventHandler;
+    }
+
+    public void setCakeUpdateEventHandler(CakeUpdateEventHandler cakeUpdateEventHandler) {
+        this.cakeUpdateEventHandler = cakeUpdateEventHandler;
+    }
 }

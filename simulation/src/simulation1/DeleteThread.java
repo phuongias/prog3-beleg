@@ -44,15 +44,13 @@ public class DeleteThread implements Runnable {
             //wird gelockt, damit der bereich geschützt wird -> kritischer Abschnitt
 
             try {
-                while (automat.getKuchenHashMap().isEmpty()) { //wenn der Automat leer ist, soll gewartet werden
-                    Thread.sleep(100);
-                }
-
+                /*while (automat.getKuchenHashMap().isEmpty()) { //wenn der Automat leer ist, soll gewartet werden
+                    Thread.sleep(0);
+                }*/
                 //synchronized (automat) {
+
                 randomKuchenLoeschen();
-                // }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
             } finally {
                 lock.unlock();
             }

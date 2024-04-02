@@ -22,6 +22,7 @@ import eventPattern.herstellerListener.HerstellerAddEventListener;
 import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import impl.Automat;
+import io.JOS;
 import kuchen.Allergen;
 import observerPattern.CapacityObserver;
 
@@ -32,7 +33,7 @@ public class main {
 
         // Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel
 
-        Automat automat = new Automat(1);
+        Automat automat = new Automat(3);
         CapacityObserver c1 = new CapacityObserver(automat);
         //AllergenObserver a1 = new AllergenObserver(automat);
 
@@ -40,6 +41,7 @@ public class main {
 
 
         Console console = new Console(automat);
+        JOS jos = new JOS();
 
 
 

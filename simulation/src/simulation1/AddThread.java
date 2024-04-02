@@ -45,22 +45,23 @@ public class AddThread implements Runnable {
 
             //synchronized (automat) {
             try {
-                while (automat.isFull()) { //wenn Automat voll ist, dann soll gewartet werden
-                    Thread.sleep(100);
-                }
+                /*while (automat.isFull()) { //wenn Automat voll ist, dann soll gewartet werden
+                    Thread.sleep(0);
+                }*/
                 randomKuchenEinfuegen();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+           /* } catch (InterruptedException e) {
+                e.printStackTrace()*/
+                ;
             } finally {
                 lock.unlock();
             }
 
 
-            try {
-                Thread.sleep(100);
+           /* try {
+                Thread.sleep(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 
 
         }

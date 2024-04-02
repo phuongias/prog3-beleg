@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="domainLogic" />
     <orderEntry type="module" module-name="eventPattern" />
+    <orderEntry type="module" module-name="io" />
   </component>
 </module>

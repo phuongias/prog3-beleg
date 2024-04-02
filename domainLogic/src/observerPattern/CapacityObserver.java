@@ -2,7 +2,9 @@ package observerPattern;
 
 import impl.Automat;
 
-public class CapacityObserver implements Observer {
+import java.io.Serializable;
+
+public class CapacityObserver implements Observer, Serializable {
 
 
     private Automat automat;

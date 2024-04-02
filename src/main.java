@@ -22,9 +22,13 @@ import eventPattern.herstellerListener.HerstellerAddEventListener;
 import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import impl.Automat;
+import impl.HerstellerImpl;
+import impl.KuchenImpl;
 import io.JOS;
 import kuchen.Allergen;
 import observerPattern.CapacityObserver;
+
+import java.util.HashMap;
 
 
 public class main {
@@ -37,7 +41,16 @@ public class main {
         CapacityObserver c1 = new CapacityObserver(automat);
         //AllergenObserver a1 = new AllergenObserver(automat);
 
-        //automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+        automat.addHersteller(new HerstellerImpl("hi"));
+
+        automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+        automat.addKuchen("Obsttorte hi 10.99 3294 PT12H Erdnuss Apfel Sahne");
+
+        /*HashMap<Integer,KuchenImpl> test =  automat.getKuchenHashMap();
+        test.clear();
+        System.out.println(test.size());*/
+
+
 
 
         Console console = new Console(automat);
@@ -106,7 +119,6 @@ public class main {
         console.setAllergenNichtVorhandenListEventHandler(allergenNichtVorhandenListEventHandler);
 
         console.execute();
-
 
     }
 }

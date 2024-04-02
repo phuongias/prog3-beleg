@@ -94,16 +94,16 @@ public class Console {
     private void handleEinfuegemodus() {
         System.out.println("Einfügemodus");
         System.out.println("Auswahl treffen:");
-        System.out.println(":h - Hersteller hinzufügen");
-        System.out.println(":k - Kuchen hinzufügen");
+        System.out.println("hersteller");
+        System.out.println("kuchen");
 
         String choice = scanner.nextLine();
 
         switch (choice) {
-            case ":h":
+            case "hersteller":
                 handleHerstellerHinzufuegen();
                 break;
-            case ":k":
+            case "kuchen":
                 handleKuchenHinzufuegen();
                 break;
             default:
@@ -134,14 +134,14 @@ public class Console {
 
     private void handleLoeschmodus() {
         System.out.println("Löschmodus ");
-        System.out.println(":h - Hersteller löschen:");
-        System.out.println(":k - Kuchen löschen: ");
+        System.out.println("hersteller");
+        System.out.println("kuchen");
 
         String innerChoice2 = scanner.nextLine();
         switch (innerChoice2) {
-            case ":h":
+            case "hersteller":
                 handleHerstellerLoeschen();
-            case "k":
+            case "kuchen":
                 handleKuchenLoeschen();
         }
     }
@@ -169,21 +169,21 @@ public class Console {
 
     private void handleAnzeigemodus() {
         System.out.println("Anzeigemodus ");
-        System.out.println(":k - Kuchenliste anzeigen: ");
-        System.out.println(":h - Hersteller + Anzahl der Kuchen anzeigen lassen: ");
-        System.out.println(":a - Allergenliste anzeigen: ");
+        System.out.println("kuchen - Kuchenliste anzeigen: ");
+        System.out.println("hersteller - Hersteller + Anzahl der Kuchen anzeigen lassen: ");
+        System.out.println("allergene - Allergenliste anzeigen: ");
         String innerChoice3 = scanner.nextLine();
         switch (innerChoice3) {
-            case ":k":
+            case "kuchen":
                 handleKuchenAnzeigen();
                 break;
 
-            case ":h":
+            case "hersteller":
                 handleHerstellerAnzeigen();
                 break;
 
 
-            case ":a":
+            case "allergene":
                 handleAllergenAnzeigen();
                 break;
 
@@ -211,17 +211,17 @@ public class Console {
 
     private void handleAllergenAnzeigen() {
         System.out.println("Allergenliste: ");
-        System.out.println(":e - nicht enthalten:");
-        System.out.println(":i - enhalten: ");
+        System.out.println("allergene e - nicht enthalten:");
+        System.out.println("allergene i - enhalten: ");
         String innerChoice4 = scanner.nextLine();
         switch (innerChoice4) {
-            case ":i":
+            case "allergene e":
                 AllergenVorhandenListEvent allergenListEvent = new AllergenVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenVorhandenListEventHandler.handle(allergenListEvent);
                 System.out.println();
                 break;
 
-            case ":e":
+            case "allergene i":
                 AllergenNichtVorhandenListEvent allerergenListEvent = new AllergenNichtVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenNichtVorhandenListEventHandler.handle(allerergenListEvent);
                 System.out.println();

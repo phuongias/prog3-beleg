@@ -35,7 +35,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
   - [ ] deterministische Funktionalität der Simulationen _getestete Klassen angeben_
   - [ ] Speichern via JOS oder JBP _getestete Klassen angeben_
   - [ ] Laden via JOS oder JBP _getestete Klassen angeben_
-- [ ] **mindestens 5 Unittests, die Mockito verwenden** (4)
+- [x] **mindestens 5 Unittests, die Mockito verwenden** (4)
 - [ ] mindestens 4 Spy- / Verhaltens-Tests (3)
 - [x] **keine unbeabsichtigt fehlschlagenden Test** (1)
 
@@ -52,21 +52,21 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] **GUI** (2)
 - [x] **I/O** (2)
   * in CLI oder GUI integriert
-- [x] **Net** (2)
+- [ ] **Net** (2)
 
 ## Funktionalität (23)
 - [x] vollständige GL (2)
 - [x] threadsichere GL (1)
 - [ ] vollständiges CLI (1)
-- [ ] alternatives CLI (1)
-  * _angeben welche Funktionalität im alternativen CLI deaktiviert_
+- [x] alternatives CLI (1)
+  * _Löschen von Herstellern und Auflisten von Allergenen deaktiviert_
 - [x] ausdifferenziertes event-System mit mindestens 3 events (2)
 - [x] observer (2)
 - [ ] angemessene Aufzählungstypen (2)
-- [ ] Simulation 2 (1)
+- [x] Simulation 2 (1)
 - [ ] Simulation 3 (1)
 - [x] skalierbare GUI (1)
-- [ ] vollständige GUI (1)
+- [x] vollständige GUI (1)
 - [ ] data binding verwendet (1)
 - [x] Änderung der Fachnummer mittels drag&drop (1)
 - [ ] Einfügen von Kuchen via GUI erfolgt nebenläufig (1)

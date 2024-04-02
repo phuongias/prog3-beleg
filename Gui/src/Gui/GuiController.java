@@ -67,7 +67,7 @@ public class GuiController implements Initializable {
     private TableView<HerstellerImpl> herstellerTableView;
 
     @FXML
-    private TableColumn<HerstellerImpl, Integer> herstellerNamenColumn;
+    private TableColumn<HerstellerImpl, String> herstellerNamenColumn;
 
     @FXML
     private TableColumn<HerstellerImpl, Integer> kuchenAnzahlColumn;
@@ -89,15 +89,17 @@ public class GuiController implements Initializable {
         kuchenHaltbarkeitColumn.setCellValueFactory(new PropertyValueFactory<KuchenImpl, Duration>("haltbarkeit"));
         kuchenInspektionsdatumColumn.setCellValueFactory(new PropertyValueFactory<KuchenImpl, Date>("inspektionsdatum"));
 
-        herstellerNamenColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        kuchenAnzahlColumn.setCellValueFactory(new PropertyValueFactory<>("kuchenAnzahl"));
+        herstellerNamenColumn.setCellValueFactory(new PropertyValueFactory<HerstellerImpl,String>("name"));
+        kuchenAnzahlColumn.setCellValueFactory(new PropertyValueFactory<HerstellerImpl, Integer>("kuchenAnzahl"));
+
 
 
         herstellerTableView.setItems(herstellerObservableList);
         kuchenListTableView.setItems(kuchenObservableList); //die table view soll dann mit der Obersever liste verknüpft werden
 
+
         // Drag-and-Drop für Kuchenliste
-        //Quelle:
+        //Quelle: https://stackoverflow.com/questions/28603224/sort-tableview-with-drag-and-drop-rows
         kuchenListTableView.setRowFactory(tv -> {
             TableRow<KuchenImpl> row = new TableRow<>();
 
@@ -128,12 +130,12 @@ public class GuiController implements Initializable {
                     KuchenImpl draggedItem = items.get(draggedIndex);
                     KuchenImpl targetItem = items.get(row.getIndex());
 
-                    // Austausch der Fachnummern
+                    //Austausch der Fachnummer
                     int tempFachnummer = draggedItem.getFachnummer();
                     draggedItem.setFachnummer(targetItem.getFachnummer());
                     targetItem.setFachnummer(tempFachnummer);
 
-                    kuchenListTableView.refresh(); // Aktualisierung der Anzeige nach dem Austausch
+                    kuchenListTableView.refresh();
 
                     event.setDropCompleted(true);
                     event.consume();
@@ -222,7 +224,7 @@ public class GuiController implements Initializable {
     public void deleteKuchenButton(ActionEvent e) {
         int deletedKuchenById = Integer.parseInt(kuchenIdToDelete.getText());
 
-        if (deletedKuchenById >= 0 && deletedKuchenById < automat.maxkapazitaet) {
+        if (deletedKuchenById >= 0 && deletedKuchenById < automat.getMaxkapazitaet()) {
             boolean kuchenGone = automat.deleteKuchenById(deletedKuchenById);
             if (kuchenGone) {
                 kuchenObservableList.remove(deletedKuchenById);

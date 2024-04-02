@@ -15,9 +15,6 @@ public class Automat implements Serializable, Observable {
 
     private HashMap<Integer, KuchenImpl> kuchenHashMap = new HashMap<Integer, KuchenImpl>();
 
-    private HashMap<Integer, Date> einfuegedatumHashMap = new HashMap();
-
-
     private ArrayList<HerstellerImpl> herstellerListe = new ArrayList<>();
 
     private HashSet<Allergen> allergenListe = new HashSet<>();
@@ -25,7 +22,7 @@ public class Automat implements Serializable, Observable {
     private List<Observer> observerList;
 
 
-    public int maxkapazitaet;
+    private int maxkapazitaet;
 
 
     public Automat(int maxkapazitaet) {
@@ -221,7 +218,10 @@ public class Automat implements Serializable, Observable {
             HerstellerImpl hersteller = kuchen.getHersteller();
             int aktuelleAnzahl = herstellerUndKuchenanzahlHashMap.get(hersteller);
             herstellerUndKuchenanzahlHashMap.put(hersteller, aktuelleAnzahl + 1);
+
+            hersteller.setAnzahlKuchen(aktuelleAnzahl +1);
         }
+
 
         return herstellerUndKuchenanzahlHashMap;
     }

@@ -17,7 +17,7 @@ public class CakeReadEventListener {
 
         //automat.getKuchenHashMap();
 
-        for (int id = 0; id < automat.maxkapazitaet; id++) {
+        for (int id = 0; id < automat.getMaxkapazitaet(); id++) {
             if (event.getKuchenHashMap().containsKey(id)) {
                 System.out.println("Kuchen: " + event.getKuchenHashMap().get(id).getKuchensorte());
                 System.out.println("Preis: " + event.getKuchenHashMap().get(id).getPreis());

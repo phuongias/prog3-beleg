@@ -3,12 +3,6 @@ package observerPattern;
 import impl.Automat;
 import impl.KuchenImpl;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
-
 
 
 class CapacityObserverTest {

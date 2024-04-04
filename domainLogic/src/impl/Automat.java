@@ -3,6 +3,7 @@ package impl;
 
 import kuchen.Allergen;
 import kuchen.Kuchen;
+
 import observerPattern.Observable;
 import observerPattern.Observer;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Automat implements Serializable, Observable {
+public class Automat implements Serializable, Observable  {
 
 
     private HashMap<Integer, KuchenImpl> kuchenHashMap = new HashMap<Integer, KuchenImpl>();
@@ -140,14 +141,13 @@ public class Automat implements Serializable, Observable {
                 this.notifyObserver();
                 return kuchen;
 
-
             } else {
                 return null; //kein fach verfügbar
 
             }
-
-        }return null;
-
+        }else { // hersteller nicht vorhanden
+            return null;
+        }
     }
 
 

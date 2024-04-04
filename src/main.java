@@ -23,12 +23,8 @@ import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import impl.Automat;
 import impl.HerstellerImpl;
-import impl.KuchenImpl;
 import io.JOS;
-import kuchen.Allergen;
 import observerPattern.CapacityObserver;
-
-import java.util.HashMap;
 
 
 public class main {

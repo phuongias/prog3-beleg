@@ -33,11 +33,11 @@ public class main {
 
         // Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel
 
-        Automat automat = new Automat(3);
+        Automat automat = new Automat(10);
         CapacityObserver c1 = new CapacityObserver(automat);
         //AllergenObserver a1 = new AllergenObserver(automat);
 
-        automat.addHersteller(new HerstellerImpl("hi"));
+        //automat.addHersteller(new HerstellerImpl("hi"));
 
         automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
         automat.addKuchen("Obsttorte hi 10.99 3294 PT12H Erdnuss Apfel Sahne");

@@ -15,11 +15,16 @@ public class DekorationsKuchen implements Kuchen {
 
     private List<Allergen> allergenList;
 
-    private Hersteller hersteller;
+    private HerstellerImpl hersteller;
     private Integer fachnummer;
+
+
+
+    private double gesamtPreis;
 
     public DekorationsKuchen(KuchenBoden kuchenBoden, HerstellerImpl hersteller, Set<Belag> belaege) {
         this.kuchenBoden = kuchenBoden;
+        this.hersteller = hersteller;
         this.belaege = belaege;
     }
 
@@ -59,7 +64,7 @@ public class DekorationsKuchen implements Kuchen {
 
     @Override
     public HerstellerImpl getHersteller() {
-        return null;
+        return hersteller;
     }
 
     @Override
@@ -83,5 +88,14 @@ public class DekorationsKuchen implements Kuchen {
 
     public void setInspektionsdatum(Date newInspektionsdatum) {
     }
+
+    public double getGesamtPreis() {
+        return gesamtPreis;
+    }
+
+    public int getFachnummer(){
+        return fachnummer;
+    }
+
 }
 

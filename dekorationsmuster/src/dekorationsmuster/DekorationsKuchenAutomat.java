@@ -12,6 +12,10 @@ public class DekorationsKuchenAutomat {
 
     private HashMap<Integer, DekorationsKuchen> kuchenHashMap = new HashMap<Integer, DekorationsKuchen>();
 
+    public ArrayList<HerstellerImpl> getHerstellerListe() {
+        return herstellerListe;
+    }
+
     private ArrayList<HerstellerImpl> herstellerListe = new ArrayList<>();
 
 
@@ -73,12 +77,6 @@ public class DekorationsKuchenAutomat {
         return hersteller;
     }
 
-    public boolean checkHerstellerVorhanden(HerstellerImpl hersteller) {
-        if (herstellerListe.contains(hersteller)) {
-            return true;
-        }
-        return false;
-    }
 
 
     public DekorationsKuchen addDekoKuchen(String kuchenInfo) {
@@ -88,7 +86,7 @@ public class DekorationsKuchenAutomat {
 
         DekorationsKuchen dekoKuchen = DekoKuchenParser.parseDekoKuchenInfo(kuchenInfo);
 
-        if (checkHerstellerVorhanden(dekoKuchen.getHersteller())) {
+        if (herstellerListe.contains(dekoKuchen.getHersteller())) {
             int fachnummer = getNaechstFreieFachnummer();
             if (fachnummer != -1) {
                 kuchenHashMap.put(fachnummer, dekoKuchen);
@@ -135,4 +133,7 @@ public class DekorationsKuchenAutomat {
         return false;
     }
 
+    public int getMaxkapazitaet() {
+        return maxkapazitaet;
     }
+}

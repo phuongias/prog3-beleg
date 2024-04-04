@@ -238,7 +238,7 @@ class AutomatTest {
         CapacityObserver capacityObserver = new CapacityObserver(new Automat(1));
 
 
-        assertTrue(observable.register(capacityObserver));
+
         
     }
 

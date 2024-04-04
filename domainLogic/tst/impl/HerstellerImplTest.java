@@ -7,26 +7,47 @@ import static org.junit.jupiter.api.Assertions.*;
 class HerstellerImplTest {
 
     @Test
-    void getName() {
+    public void testGetName() {
+        String name = "Phuong";
+        HerstellerImpl hersteller = new HerstellerImpl(name);
+        assertEquals(name, hersteller.getName());
     }
 
     @Test
-    void testEquals() {
+    public void testEquals() {
+        HerstellerImpl hersteller1 = new HerstellerImpl("Hersteller1");
+        HerstellerImpl hersteller2 = new HerstellerImpl("Hersteller1");
+        HerstellerImpl hersteller3 = new HerstellerImpl("Hersteller2");
+
+        assertTrue(hersteller1.equals(hersteller2));
+        assertFalse(hersteller1.equals(hersteller3));
     }
 
     @Test
-    void testHashCode() {
+    public void testHashCode() {
+        HerstellerImpl hersteller1 = new HerstellerImpl("Hersteller1");
+        HerstellerImpl hersteller2 = new HerstellerImpl("Hersteller1");
+        assertEquals(hersteller1.hashCode(), hersteller2.hashCode());
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
+        String name = "Hersteller";
+        HerstellerImpl hersteller = new HerstellerImpl(name);
+        assertEquals(name, hersteller.toString());
     }
 
     @Test
-    void setAnzahlKuchen() {
+    public void testSetAnzahlKuchen() {
+        HerstellerImpl hersteller = new HerstellerImpl("Hersteller");
+        hersteller.setAnzahlKuchen(10);
+        assertEquals(10, hersteller.getKuchenAnzahl());
     }
 
     @Test
-    void getKuchenAnzahl() {
+    public void testGetKuchenAnzahl() {
+        HerstellerImpl hersteller = new HerstellerImpl("Hersteller");
+        hersteller.setAnzahlKuchen(10);
+        assertEquals(10, hersteller.getKuchenAnzahl());
     }
 }

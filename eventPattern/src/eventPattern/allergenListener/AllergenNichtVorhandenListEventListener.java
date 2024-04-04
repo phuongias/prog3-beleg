@@ -1,7 +1,6 @@
 package eventPattern.allergenListener;
 
 import eventPattern.allergenEvent.AllergenNichtVorhandenListEvent;
-import eventPattern.allergenEvent.AllergenVorhandenListEvent;
 import impl.Automat;
 import kuchen.Allergen;
 
@@ -17,7 +16,7 @@ public class AllergenNichtVorhandenListEventListener {
 
     public void onEvent(AllergenNichtVorhandenListEvent event) {
 
-        Collection<Allergen> allergensInKuchen = automat.showAllergenList(event.getKuchenHashMap());
+        Collection<Allergen> allergensInKuchen = automat.getAllergenList(event.getKuchenHashMap());
 
         if (allergensInKuchen.isEmpty()) {
             System.out.println("Keine Allergene vorhanden.");

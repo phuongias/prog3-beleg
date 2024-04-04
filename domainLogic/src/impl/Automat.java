@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Automat implements Serializable, Observable  {
+public class Automat implements Serializable, Observable {
 
 
     private HashMap<Integer, KuchenImpl> kuchenHashMap = new HashMap<Integer, KuchenImpl>();
@@ -48,7 +48,7 @@ public class Automat implements Serializable, Observable  {
         }
     }
 
-    private int getNaechstFreieFachnummer() {
+    int getNaechstFreieFachnummer() {
         for (int id = 0; id < maxkapazitaet; id++) {
             if (!kuchenHashMap.containsKey(id)) {
                 return id;
@@ -145,7 +145,7 @@ public class Automat implements Serializable, Observable  {
                 return null; //kein fach verfügbar
 
             }
-        }else { // hersteller nicht vorhanden
+        } else { // hersteller nicht vorhanden
             return null;
         }
     }
@@ -219,7 +219,7 @@ public class Automat implements Serializable, Observable  {
             int aktuelleAnzahl = herstellerUndKuchenanzahlHashMap.get(hersteller);
             herstellerUndKuchenanzahlHashMap.put(hersteller, aktuelleAnzahl + 1);
 
-            hersteller.setAnzahlKuchen(aktuelleAnzahl +1);
+            hersteller.setAnzahlKuchen(aktuelleAnzahl + 1);
         }
 
 
@@ -228,7 +228,7 @@ public class Automat implements Serializable, Observable  {
 
 
     //Allergen anzeigen lassen
-    public Collection<Allergen> showAllergenList(HashMap<Integer, KuchenImpl> kuchenHashMap) {
+    public Collection<Allergen> getAllergenList(HashMap<Integer, KuchenImpl> kuchenHashMap) {
 
         Set<Allergen> vorhandeneAllergene = new HashSet<>();
 

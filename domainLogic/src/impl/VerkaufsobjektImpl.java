@@ -26,4 +26,15 @@ public class VerkaufsobjektImpl implements Verkaufsobjekt {
     }
 
 
+    public void setPreis(BigDecimal newPreis) {
+        this.preis = newPreis;
+    }
+
+    public void setInspektionsdatum(Date newDatum) {
+        this.inspektionsdatum = newDatum;
+    }
+
+    public void setFachnummer(int newFachnummer) {
+        this.fachnummer = newFachnummer;
+    }
 }

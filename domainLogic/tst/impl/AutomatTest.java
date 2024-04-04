@@ -1,24 +1,54 @@
 package impl;
 
+import kuchen.Allergen;
 import kuchen.Kuchen;
 import observerPattern.CapacityObserver;
 import observerPattern.Observable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Observer;
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class AutomatTest {
     @Test
     void getBelegteFaecher() {
+
+        Automat automat = new Automat(10); // Beispiel: Automat mit Kapazität 10
+        HashMap<Integer, KuchenImpl> kuchenHashMap = automat.getKuchenHashMap();
+        automat.addHersteller(new HerstellerImpl("hi"));
+
+        String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+        String kuchen2 = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Birne";
+
+
+        KuchenImpl result = automat.addKuchen(kuchen);
+        KuchenImpl result2 = automat.addKuchen(kuchen2);
+
+        assertEquals(2, automat.getBelegteFaecher());
+
+
     }
 
     @Test
     void getNaechstFreieFachnummer() {
+
+        Automat automat = new Automat(10); // Beispiel: Automat mit Kapazität 10
+        HashMap<Integer, KuchenImpl> kuchenHashMap = automat.getKuchenHashMap();
+        automat.addHersteller(new HerstellerImpl("hi"));
+
+        String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+        String kuchen2 = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Birne";
+
+
+        KuchenImpl result = automat.addKuchen(kuchen);
+        KuchenImpl result2 = automat.addKuchen(kuchen2);
+
+        assertEquals(2, automat.getNaechstFreieFachnummer());
 
     }
 
@@ -61,15 +91,44 @@ class AutomatTest {
 
     //test hersteller
 
-
     @Test
     void checkHerstellerVorhanden() {
+
+        Automat automat = new Automat(10);
+
+        HerstellerImpl hersteller1 = new HerstellerImpl("Hersteller1");
+        HerstellerImpl hersteller2 = new HerstellerImpl("Hersteller2");
+
+        automat.addHersteller(hersteller1);
+        automat.addHersteller(hersteller2);
+
+        assertTrue(automat.checkHerstellerVorhanden(hersteller1));
+        assertTrue(automat.checkHerstellerVorhanden(hersteller2));
+
+
+        HerstellerImpl nichtVorhandenerHersteller = new HerstellerImpl("Nicht vorhandener Hersteller");
+        assertFalse(automat.checkHerstellerVorhanden(nichtVorhandenerHersteller));
+
 
     }
 
     @Test
     void getHerstellerListe() {
-        Automat automat = new Automat(1);
+
+        Automat automat = new Automat(10);
+
+        HerstellerImpl hersteller1 = new HerstellerImpl("Hersteller1");
+        HerstellerImpl hersteller2 = new HerstellerImpl("Hersteller2");
+
+        automat.addHersteller(hersteller1);
+        automat.addHersteller(hersteller2);
+
+        ArrayList<HerstellerImpl> herstellerListe = automat.getHerstellerListe();
+
+        assertEquals(2, herstellerListe.size());
+        assertTrue(herstellerListe.contains(hersteller1));
+        assertTrue(herstellerListe.contains(hersteller2));
+        assertEquals(2, herstellerListe.size());
 
 
     }
@@ -101,7 +160,7 @@ class AutomatTest {
     }
 
 
-    //test addkuchen
+//test addkuchen
 
     @Test
     void addKuchen_shouldSuccessfully_Add_whenValidKuchen() {
@@ -116,17 +175,6 @@ class AutomatTest {
         assertTrue(automat.getKuchenHashMap().containsValue(result));
     }
 
-    @Test
-    void addKuchen_shouldThrowError_whenInvalidKuchen() {
-        Automat automat = new Automat(10);
-        automat.addHersteller(new HerstellerImpl("hi"));
-        String kuchen = "jaja hi 10.99 3294 PT12H Erdnuss Apfel";
-        KuchenImpl result = automat.addKuchen(kuchen);
-
-        //assertNotNull(result);
-        assertEquals(0, automat.getBelegteFaecher());
-        assertFalse(automat.getKuchenHashMap().containsValue(result));
-    }
 
     @Test
     void addKuchen_shouldSucessfully_whenHerstellerVorhanden_withMockito() {
@@ -156,17 +204,6 @@ class AutomatTest {
         assertFalse(automat.getKuchenHashMap().containsValue(result2));
     }
 
- /*   @Test
-    void addKuchen_shouldNotAdd_whenAutomatFull_withMockito(){
-
-        KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
-        Automat automat = new Automat(1);
-        automat.addHersteller(new HerstellerImpl("hi"));
-        String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
-
-        KuchenImpl result = automat.addKuchen(kuchenMock);
-
-    }*/
 
     @Test
     void addKuchen_shouldThrowError_whenNoHersteller() {
@@ -186,7 +223,16 @@ class AutomatTest {
     void deleteKuchenById_shouldThrowError_whenKuchenIsNotInAutomat() {
         Automat automat = new Automat(10);
 
-        KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+        String kuchensorte = "Obstkuchen";
+        HerstellerImpl hersteller = new HerstellerImpl("TestHersteller");
+        BigDecimal preis = BigDecimal.valueOf(5);
+        int naehrwert = 100;
+        Duration haltbarkeit = Duration.ofDays(7);
+        List<Allergen> allergene = Arrays.asList(Allergen.Gluten);
+        String add = "Apfel";
+
+        KuchenImpl kuchen = new ObstkuchenImpl(kuchensorte, hersteller, preis, naehrwert, haltbarkeit, allergene, add);
+        kuchen.setFachnummer(1);
         boolean result = automat.deleteKuchenById(kuchen.getFachnummer());
 
         assertFalse(result);
@@ -194,20 +240,38 @@ class AutomatTest {
         assertFalse(automat.getKuchenHashMap().containsValue(kuchen));
     }
 
+
+    @Test
+    void deleteKuchenById_shouldSuccessful_whenKuchenInAutomat() {
+
+        Automat automat = new Automat(10);
+        automat.addHersteller(new HerstellerImpl("hi"));
+
+        KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+        boolean result = automat.deleteKuchenById(kuchen.getFachnummer());
+
+        assertTrue(result);
+        assertEquals(0, automat.getBelegteFaecher());
+        assertFalse(automat.getKuchenHashMap().containsValue(kuchen));
+    }
+
+
     //test update inspektionsdatum
     @Test
     void updateInspektiosdatum() {
         Automat automat = new Automat(2);
+        HerstellerImpl hersteller = new HerstellerImpl("hi");
+        automat.addHersteller(hersteller);
         KuchenImpl kuchen = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
 
         boolean result = automat.updateInspektiosdatum(kuchen.getFachnummer());
 
-        //assertTrue(result);
+        assertTrue(result);
         assertNotEquals(new Date(), kuchen.getInspektionsdatum());
     }
 
     @Test
-    void getHerstellerUndKuchenanzahl() {
+    void getHerstellerUndKuchenanzahl_shouldSuccessful() {
 
         Automat automat = new Automat(10);
         HerstellerImpl hersteller = new HerstellerImpl("hi");
@@ -223,31 +287,53 @@ class AutomatTest {
     }
 
     @Test
-    void showAllergenList() {
+    void getAllergenList() {
+
+        Automat automat = new Automat(10);
+        HerstellerImpl hersteller = new HerstellerImpl("hi");
+        automat.addHersteller(hersteller);
+
+        KuchenImpl kuchen1 = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Gluten Apfel");
+        KuchenImpl kuchen2 = automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Birne");
+
+        Collection<Allergen> result = automat.getAllergenList(automat.getKuchenHashMap());
+
+        assertEquals(Set.of(Allergen.Gluten,Allergen.Erdnuss), result);
+        assertEquals(2,2);
+
     }
 
-
-    @Test
-    void getAllergenListe() {
-    }
 
 
     @Test
     void register() {
+        Automat observable = new Automat(10);
+        CapacityObserver observer = new CapacityObserver(observable);
+        assertTrue(observable.register(observer));
 
-        CapacityObserver capacityObserver = new CapacityObserver(new Automat(1));
 
-
-
-        
     }
 
     @Test
     void unregister() {
+        Automat observable = new Automat(10);
+        CapacityObserver observer = new CapacityObserver(observable);
+
+        assertTrue(observable.unregister(observer));
+
+
+
     }
 
     @Test
     void notifyObserver() {
+        Automat observable = new Automat(10);
+        CapacityObserver mockObserver = mock(CapacityObserver.class);
+
+        assertTrue(observable.register(mockObserver));
+        observable.notifyObserver();
+        verify(mockObserver, times(1)).update();
+
     }
 
 

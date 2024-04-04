@@ -6,7 +6,6 @@ import impl.Automat;
 import kuchen.Allergen;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 public class AllergenVorhandenListEventListener {
 
@@ -18,7 +17,7 @@ public class AllergenVorhandenListEventListener {
 
     public void onEvent(AllergenVorhandenListEvent event) {
 
-        Collection<Allergen> allergensInKuchen = automat.showAllergenList(event.getKuchenHashMap());
+        Collection<Allergen> allergensInKuchen = automat.getAllergenList(event.getKuchenHashMap());
 
         System.out.println("Vorhandene Allergene:");
         for (Allergen allergen : Allergen.values()) {

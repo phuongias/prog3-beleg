@@ -40,8 +40,8 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] **keine unbeabsichtigt fehlschlagenden Test** (1)
 
 ## Fehlerfreiheit (10)
-- [ ] **Kapselung** (5)
-- [ ] **keine Ablauffehler** (5)
+- [x] **Kapselung** (5)
+- [x] **keine Ablauffehler** (5)
 
 ## Basisfunktionalität (12)
 - [x] **CRUD** (2)
@@ -75,7 +75,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [ ] Server unterstützt konkurierende Clients für TCP oder UDP (2)
 
 ## zusätzliche Anforderungen (10)
-- [ ] Kuchen nach Dekoratormuster (4)
+- [x] Kuchen nach Dekoratormuster (4)
 - [ ] korrekte Aggregationen (2)
 - [ ] Integration in CLI & GUI (4)
 

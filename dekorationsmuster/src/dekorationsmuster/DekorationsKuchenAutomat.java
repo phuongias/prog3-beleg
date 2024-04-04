@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class DekorationsKuchenAutomat {
+public class DekorationsKuchenAutomat { //Methoden groeßtenteils von Automatenklasse der DL uebernommen
 
     private HashMap<Integer, DekorationsKuchen> kuchenHashMap = new HashMap<Integer, DekorationsKuchen>();
 

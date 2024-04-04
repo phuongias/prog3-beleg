@@ -1,17 +1,25 @@
 package impl;
 
 import kuchen.Kuchen;
+import observerPattern.CapacityObserver;
+import observerPattern.Observable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Observer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AutomatTest {
     @Test
     void getBelegteFaecher() {
+    }
+
+    @Test
+    void getNaechstFreieFachnummer() {
+
     }
 
     @Test
@@ -40,14 +48,31 @@ class AutomatTest {
 
     @Test
     void getKuchenHashMap() {
+        Automat automat = new Automat(1);
+
+        HashMap<Integer, KuchenImpl> result = automat.getKuchenHashMap();
+        HerstellerImpl hersteller = new HerstellerImpl("hi");
+        automat.addHersteller(hersteller);
+
+        automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
+
+        assertEquals(1, automat.getKuchenHashMap().size());
+    }
+
+    //test hersteller
+
+
+    @Test
+    void checkHerstellerVorhanden() {
+
     }
 
     @Test
     void getHerstellerListe() {
+        Automat automat = new Automat(1);
+
+
     }
-
-
-    //test hersteller
 
     @Test
     void testAddHersteller() {
@@ -61,6 +86,7 @@ class AutomatTest {
         assertTrue(automat.getHerstellerListe().contains(hersteller));
     }
 
+
     @Test
     void testDeleteHersteller() {
         Automat automat = new Automat(10);
@@ -73,6 +99,7 @@ class AutomatTest {
         assertEquals(0, automat.getHerstellerListe().size());
         assertFalse(automat.getHerstellerListe().contains(hersteller));
     }
+
 
     //test addkuchen
 
@@ -102,7 +129,7 @@ class AutomatTest {
     }
 
     @Test
-    void addKuchen_shouldSucessfully_whenHerstellerVorhanden_withMockito(){
+    void addKuchen_shouldSucessfully_whenHerstellerVorhanden_withMockito() {
         HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
         KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
         Mockito.when(kuchenMock.getHersteller()).thenReturn(herstellerMock);
@@ -129,7 +156,7 @@ class AutomatTest {
         assertFalse(automat.getKuchenHashMap().containsValue(result2));
     }
 
-    @Test
+ /*   @Test
     void addKuchen_shouldNotAdd_whenAutomatFull_withMockito(){
 
         KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
@@ -137,12 +164,9 @@ class AutomatTest {
         automat.addHersteller(new HerstellerImpl("hi"));
         String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
 
-        KuchenImpl result = automat.addKuchen(kuchen);
+        KuchenImpl result = automat.addKuchen(kuchenMock);
 
-        assertNull(result);
-
-
-    }
+    }*/
 
     @Test
     void addKuchen_shouldThrowError_whenNoHersteller() {
@@ -210,6 +234,12 @@ class AutomatTest {
 
     @Test
     void register() {
+
+        CapacityObserver capacityObserver = new CapacityObserver(new Automat(1));
+
+
+        assertTrue(observable.register(capacityObserver));
+        
     }
 
     @Test

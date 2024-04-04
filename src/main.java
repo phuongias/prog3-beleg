@@ -47,8 +47,6 @@ public class main {
         System.out.println(test.size());*/
 
 
-
-
         Console console = new Console(automat);
         JOS jos = new JOS();
 

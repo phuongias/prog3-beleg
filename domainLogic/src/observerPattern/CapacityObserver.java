@@ -8,11 +8,11 @@ public class CapacityObserver implements Observer, Serializable {
 
 
     private Automat automat;
-    private int contentSize;
+    private int kuchenHashMapSize;
 
     public CapacityObserver(Automat automat){
         this.automat = automat;
-        this.contentSize = automat.getKuchenHashMap().size();
+        this.kuchenHashMapSize = automat.getKuchenHashMap().size();
         this.automat.register(this);
     }
 
@@ -21,6 +21,6 @@ public class CapacityObserver implements Observer, Serializable {
         if(automat.getKuchenHashMap().size() >= (automat.getMaxkapazitaet()*0.9)){
             System.out.println("The data base has reached 90% of its capacity!");
         }
-        contentSize = automat.getKuchenHashMap().size();
+        kuchenHashMapSize = automat.getKuchenHashMap().size();
     }
 }

@@ -20,8 +20,9 @@ public class KremkuchenImpl extends KuchenImpl implements Kremkuchen, Serializab
         this.kremsorte = kremsorte;
     }
 
-    public String getKremsorte() {
-        return kremsorte;
-    }
 
+    @Override
+    public String getKremsorte() {
+        return null;
+    }
 }

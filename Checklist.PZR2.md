@@ -27,15 +27,15 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 
 ## Tests (28)
 - [x] **Testqualität** (7)
-- [ ] **Testabdeckung GL (inkl. Abhängigkeiten)** (7) _Abdeckung in Prozent angeben_
+- [x] **Testabdeckung GL (inkl. Abhängigkeiten)** (7) _100%_
 - [ ] Testabdeckung Rest (6)
-  - [ ] Einfügen von Kund*innen über das CLI _getestete Klassen angeben_
-  - [ ] Anzeigen von Kund*innen über das CLI _getestete Klassen angeben_
-  - [ ] ein Beobachter _getestete Klassen angeben_
+  - [ ] Einfügen von Kund*innen über das CLI _cli_
+  - [ ] Anzeigen von Kund*innen über das CLI _cli_
+  - [x] ein Beobachter _CapacityObserverTest(befindet sich in der DL im tst Ordner)_
   - [ ] deterministische Funktionalität der Simulationen _getestete Klassen angeben_
   - [ ] Speichern via JOS oder JBP _getestete Klassen angeben_
   - [ ] Laden via JOS oder JBP _getestete Klassen angeben_
-- [x] **mindestens 5 Unittests, die Mockito verwenden** (4)
+- [ ] **mindestens 5 Unittests, die Mockito verwenden** (4)
 - [ ] mindestens 4 Spy- / Verhaltens-Tests (3)
 - [x] **keine unbeabsichtigt fehlschlagenden Test** (1)
 
@@ -76,6 +76,6 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 
 ## zusätzliche Anforderungen (10)
 - [x] Kuchen nach Dekoratormuster (4)
-- [ ] korrekte Aggregationen (2)
+- [x] korrekte Aggregationen (2)
 - [ ] Integration in CLI & GUI (4)
 

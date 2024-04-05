@@ -16,6 +16,7 @@ public class Automat implements Serializable, Observable {
 
     private HashMap<Integer, KuchenImpl> kuchenHashMap = new HashMap<Integer, KuchenImpl>();
 
+
     private ArrayList<HerstellerImpl> herstellerListe = new ArrayList<>();
 
     private HashSet<Allergen> allergenListe = new HashSet<>();
@@ -268,5 +269,7 @@ public class Automat implements Serializable, Observable {
             observer.update();
         }
     }
+
+
 }
   

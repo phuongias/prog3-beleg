@@ -56,7 +56,7 @@ class ParserTest {
 
     @Test
     public void testParseKuchenInfo_InvalidInput() {
-        String input = "InvalidInput"; // Ungültige Eingabe
+        String input = "InvalidInput"; //Ungültige Eingabe
         assertThrows(IllegalArgumentException.class, () -> {
             Parser.parseKuchenInfo(input);
         });

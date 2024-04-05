@@ -1,5 +1,6 @@
-package console;
+package cli;
 
+import dekorationsmuster.DekorationsKuchenAutomat;
 import eventPattern.allergenEvent.AllergenNichtVorhandenListEvent;
 import eventPattern.allergenEvent.AllergenVorhandenListEvent;
 import eventPattern.allergenHandler.AllergenNichtVorhandenListEventHandler;
@@ -27,7 +28,7 @@ import io.JOS;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Console {
+public class Cli {
 
     private Automat automat;
 
@@ -48,7 +49,7 @@ public class Console {
 
     private Scanner scanner;
 
-    public Console(Automat automat) {
+    public Cli(Automat automat) {
         this.automat = automat;
         this.scanner = new Scanner(System.in);
     }

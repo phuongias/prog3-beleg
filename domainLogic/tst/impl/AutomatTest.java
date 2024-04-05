@@ -31,7 +31,6 @@ class AutomatTest {
 
         assertEquals(2, automat.getBelegteFaecher());
 
-
     }
 
     @Test
@@ -145,6 +144,14 @@ class AutomatTest {
         assertTrue(automat.getHerstellerListe().contains(hersteller));
     }
 
+    @Test
+    void addHersteller_withMockito() {
+
+        Automat automat = new Automat(10);
+        HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
+        assertTrue(automat.addHersteller(herstellerMock));
+    }
+
 
     @Test
     void testDeleteHersteller() {
@@ -159,6 +166,14 @@ class AutomatTest {
         assertFalse(automat.getHerstellerListe().contains(hersteller));
     }
 
+    @Test
+    void deleteHersteller_withMockito(){
+        Automat automat = new Automat(10);
+        HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
+        HerstellerImpl hersteller = automat.deleteHersteller(herstellerMock);
+        assertFalse(automat.getHerstellerListe().contains(hersteller));
+
+    }
 
 //test addkuchen
 
@@ -298,11 +313,10 @@ class AutomatTest {
 
         Collection<Allergen> result = automat.getAllergenList(automat.getKuchenHashMap());
 
-        assertEquals(Set.of(Allergen.Gluten,Allergen.Erdnuss), result);
-        assertEquals(2,2);
+        assertEquals(Set.of(Allergen.Gluten, Allergen.Erdnuss), result);
+        assertEquals(2, 2);
 
     }
-
 
 
     @Test
@@ -320,7 +334,6 @@ class AutomatTest {
         CapacityObserver observer = new CapacityObserver(observable);
 
         assertTrue(observable.unregister(observer));
-
 
 
     }

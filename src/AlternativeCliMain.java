@@ -1,4 +1,4 @@
-import console.Console;
+import cli.Cli;
 import eventPattern.cakeHandler.CakeAddEventHandler;
 import eventPattern.cakeHandler.CakeDeleteEventHandler;
 import eventPattern.cakeHandler.CakeReadEventHandler;
@@ -29,7 +29,7 @@ public class AlternativeCliMain {
         }
 
         Automat automat = new Automat(maxKapazitaet);
-        Console cliConsole = new Console(automat);
+        Cli cliConsole = new Cli(automat);
         CapacityObserver capacityObserver = new CapacityObserver(automat);
         System.out.println("Löschen von Hersteller und auflisten von Allergene nicht vorhanden.");
 

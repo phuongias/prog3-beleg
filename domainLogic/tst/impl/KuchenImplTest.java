@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,10 +32,36 @@ class KuchenImplTest {
 
     @Test
     void setInspektionsdatum() {
+        Automat automat = new Automat(10);
+
+        Date expected = new Date();
+
+        HerstellerImpl hersteller = new HerstellerImpl("hi");
+        automat.addHersteller(hersteller);
+
+        String kuchenInfo = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+        KuchenImpl obstkuchen = automat.addKuchen(kuchenInfo);
+
+
+        obstkuchen.setInspektionsdatum(expected);
+
+        assertEquals(expected, obstkuchen.getInspektionsdatum());
+
+
     }
 
     @Test
     void setFachnummer() {
+        Automat automat = new Automat(10);
+
+        HerstellerImpl hersteller = new HerstellerImpl("hi");
+        automat.addHersteller(hersteller);
+
+        String kuchenInfo = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
+        KuchenImpl obstkuchen = automat.addKuchen(kuchenInfo);
+        int fachnummer = 10;
+        obstkuchen.setFachnummer(fachnummer);
+        assertEquals(10, obstkuchen.getFachnummer());
     }
 
     @Test
@@ -145,8 +172,6 @@ class KuchenImplTest {
 
         KuchenImpl kuchen = automat.addKuchen(kuchenInfo);
         KuchenImpl kuchen2 = automat.addKuchen(kuchenInfo2);
-
-
 
         assertEquals(0, kuchen.getFachnummer());
         assertEquals(1,kuchen2.getFachnummer());

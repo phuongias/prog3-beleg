@@ -1,8 +1,6 @@
-import dekorationsmuster.Belag;
+import dekoKuchenCli.DekoKuchenCli;
 import dekorationsmuster.DekorationsKuchen;
 import dekorationsmuster.DekorationsKuchenAutomat;
-import dekorationsmuster.KuchenBoden;
-import impl.Automat;
 import impl.HerstellerImpl;
 
 public class dekorotionskuchenMain {
@@ -16,13 +14,18 @@ public class dekorotionskuchenMain {
         String dekoKuchenString = "Muerteig hi Apfel Sahne";
         String dekoKuchenString2 = "Muerteig hi Apfel Sahne";
 
-        dekorationsKuchenAutomat.addDekoKuchen(dekoKuchenString2);
-
+        DekorationsKuchen dekoKuchen2 = dekorationsKuchenAutomat.addDekoKuchen(dekoKuchenString2);
 
         DekorationsKuchen dekorationsKuchen = dekorationsKuchenAutomat.addDekoKuchen(dekoKuchenString);
 
         System.out.println(dekorationsKuchenAutomat.getKuchenHashMap().size());
         System.out.println(dekorationsKuchenAutomat.getHerstellerListe());
+
+        System.out.println("Allergenliste von Kuchen1: " +dekorationsKuchen.gesamtAllergene());
+        System.out.println("Preis von Kuchen 1: "+ dekorationsKuchen.gesamtpreisBerechnen());
+
+        DekoKuchenCli cli = new DekoKuchenCli(dekorationsKuchenAutomat);
+        cli.execute();
 
 
 

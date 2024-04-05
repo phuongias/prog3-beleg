@@ -3,13 +3,12 @@ package dekorationsmuster;
 import impl.HerstellerImpl;
 import kuchen.Allergen;
 import kuchen.Kuchen;
-import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.*;
 
-public class DekorationsKuchen implements Kuchen {
+public class DekorationsKuchen {
     private KuchenBoden kuchenBoden;
     private Set<Belag> belaege;
 
@@ -17,7 +16,9 @@ public class DekorationsKuchen implements Kuchen {
 
     private HerstellerImpl hersteller;
     private Integer fachnummer;
-
+    private Integer naehrwert;
+    private Date inspektionsdatum;
+    private Duration haltbarkeit;
 
 
     private double gesamtPreis;
@@ -56,30 +57,30 @@ public class DekorationsKuchen implements Kuchen {
 
     public List<Allergen> gesamtAllergene() {
         List<Allergen> allergene = new ArrayList<>(kuchenBoden.getAllergene());
+
         for (Belag belag : belaege) {
-            allergene.addAll(belag.getAllergene());
+            for (Allergen allergen : belag.getAllergene()) {
+                if (!allergene.contains(allergen)) {
+                    allergene.add(allergen);
+                }
+            }
         }
+
         return allergene;
     }
 
-    @Override
+    public Integer gesamtNaehrwert() {
+        return naehrwert;
+    }
+
+
     public HerstellerImpl getHersteller() {
         return hersteller;
     }
 
-    @Override
-    public Collection<Allergen> getAllergene() {
-        return null;
-    }
 
-    @Override
-    public int getNaehrwert() {
-        return 0;
-    }
-
-    @Override
     public Duration getHaltbarkeit() {
-        return null;
+        return haltbarkeit;
     }
 
     public void setFachnummer(int fachnummer) {
@@ -87,15 +88,15 @@ public class DekorationsKuchen implements Kuchen {
     }
 
     public void setInspektionsdatum(Date newInspektionsdatum) {
+        this.inspektionsdatum = newInspektionsdatum;
     }
 
-    public double getGesamtPreis() {
-        return gesamtPreis;
-    }
 
-    public int getFachnummer(){
+    public int getFachnummer() {
         return fachnummer;
     }
 
+    public Date getInspektionsdatum() {
+        return inspektionsdatum;
+    }
 }
-

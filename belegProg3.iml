@@ -14,7 +14,7 @@
     <orderEntry type="module" module-name="Gui" />
     <orderEntry type="module" module-name="networking" />
     <orderEntry type="module" module-name="eventPattern" />
-    <orderEntry type="module" module-name="console" />
+    <orderEntry type="module" module-name="cli" />
     <orderEntry type="module" module-name="io" />
     <orderEntry type="library" scope="TEST" name="mockito.core" level="project" />
     <orderEntry type="module" module-name="dekorationsmuster" />

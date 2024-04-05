@@ -1,9 +1,6 @@
-
-import cli.Cli;
+package cli;
 
 import eventPattern.allergenHandler.AllergenNichtVorhandenListEventHandler;
-
-
 import eventPattern.allergenHandler.AllergenVorhandenListEventHandler;
 import eventPattern.allergenListener.AllergenNichtVorhandenListEventListener;
 import eventPattern.allergenListener.AllergenVorhandenListEventListener;
@@ -22,35 +19,23 @@ import eventPattern.herstellerListener.HerstellerAddEventListener;
 import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import impl.Automat;
-import io.JOS;
-import observerPattern.CapacityObserver;
+import impl.HerstellerImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import verwaltung.Hersteller;
 
-public class main {
+import java.io.ByteArrayInputStream;
+import java.io.SequenceInputStream;
 
-    public static void main(String[] args) {
+import static org.junit.jupiter.api.Assertions.*;
 
-        // Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel
+class CliTest {
+    private Automat automat = new Automat(10);
+    Cli console = new Cli(automat);
 
-        Automat automat = new Automat(10);
-        CapacityObserver c1 = new CapacityObserver(automat);
-        //AllergenObserver a1 = new AllergenObserver(automat);
-
-        //automat.addHersteller(new HerstellerImpl("hi"));
-
-        automat.addKuchen("Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel");
-        automat.addKuchen("Obsttorte hi 10.99 3294 PT12H Erdnuss Apfel Sahne");
-
-        /*HashMap<Integer,KuchenImpl> test =  automat.getKuchenHashMap();
-        test.clear();
-        System.out.println(test.size());*/
-
-
-        Cli console = new Cli(automat);
-        JOS jos = new JOS();
-
-
-
+    @BeforeEach
+    void setUp() {
         //hersteller  handler erstellen
         HerstellerAddEventHandler herstellerAddEventHandler = new HerstellerAddEventHandler();
         HerstellerDeleteEventHandler herstellerDeleteEventHandler = new HerstellerDeleteEventHandler();
@@ -110,8 +95,39 @@ public class main {
         AllergenNichtVorhandenListEventListener allergenNichtVorhandenListEventListener = new AllergenNichtVorhandenListEventListener(automat);
         allergenNichtVorhandenListEventHandler.addListener(allergenNichtVorhandenListEventListener);
         console.setAllergenNichtVorhandenListEventHandler(allergenNichtVorhandenListEventHandler);
+    }
 
-        console.execute();
+
+    @Test
+    void addHerstellerInCli() {
+
+        ByteArrayInputStream inputStream1 = new ByteArrayInputStream(":c\n".getBytes());
+        ByteArrayInputStream inputStream2 = new ByteArrayInputStream("hersteller\n".getBytes());
+        ByteArrayInputStream inputStream3 = new ByteArrayInputStream("Hersteller\n".getBytes());
+        SequenceInputStream sequenceInputStream = new SequenceInputStream(inputStream1, inputStream2);
+        SequenceInputStream finalSequenceInputStream = new SequenceInputStream(sequenceInputStream, inputStream3);
+
+        System.setIn(finalSequenceInputStream);
+
+        try {
+            // Führe die CLI aus, um einen Hersteller hinzuzufügen
+            console.execute();
+        } catch (Exception e) {
+            // Behandle mögliche Fehler
+            fail("Fehler beim Ausführen der CLI: " + e.getMessage());
+        }
+
+        // Überprüfe, ob der Hersteller erfolgreich hinzugefügt wurde
+        // Vergleiche die Anzahl der Hersteller vor und nach dem Hinzufügen
+        assertEquals(1, automat.getHerstellerListe().size());
+
+        // Überprüfe, ob der hinzugefügte Hersteller korrekt ist
+        HerstellerImpl hersteller = automat.getHerstellerListe().get(0);
+        assertEquals("Hersteller", hersteller.getName());
 
     }
+
 }
+        
+
+       

@@ -39,8 +39,8 @@ public abstract class KuchenImpl implements Kuchen, Verkaufsobjekt, Serializable
 
 
 
-    public void setInspektionsdatum(Date newInspektionsdatum) {
-        this.inspektionsdatum = newInspektionsdatum;
+    public void setInspektionsdatum(Date inspektionsdatum) {
+        this.inspektionsdatum = inspektionsdatum;
     }
 
 
@@ -53,8 +53,8 @@ public abstract class KuchenImpl implements Kuchen, Verkaufsobjekt, Serializable
     }
 
 
-    @Override
-    public Collection<Allergen> getAllergene() {
+    @Override 
+    public List<Allergen> getAllergene() {
         return allergene;
     }
 

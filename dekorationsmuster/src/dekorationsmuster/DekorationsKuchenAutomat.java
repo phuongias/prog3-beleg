@@ -1,8 +1,6 @@
 package dekorationsmuster;
 
 import impl.HerstellerImpl;
-import impl.KuchenImpl;
-import impl.Parser;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -23,6 +23,7 @@ import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import impl.Automat;
 import io.JOS;
+import observerPattern.AllergenObserver;
 import observerPattern.CapacityObserver;
 
 
@@ -34,7 +35,7 @@ public class main {
 
         Automat automat = new Automat(10);
         CapacityObserver c1 = new CapacityObserver(automat);
-        //AllergenObserver a1 = new AllergenObserver(automat);
+        AllergenObserver a1 = new AllergenObserver(automat);
 
         //automat.addHersteller(new HerstellerImpl("hi"));
 

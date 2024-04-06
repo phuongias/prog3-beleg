@@ -15,6 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AutomatTest {
+
+    //Automaten Klasse wird getestet
+
+
     @Test
     void getBelegteFaecher() {
 
@@ -48,8 +52,8 @@ class AutomatTest {
         KuchenImpl result2 = automat.addKuchen(kuchen2);
 
         assertEquals(2, automat.getNaechstFreieFachnummer());
-
     }
+
 
     @Test
     void testIsFull_shouldThrowError_whenCapacityIsFull() {
@@ -133,7 +137,7 @@ class AutomatTest {
     }
 
     @Test
-    void testAddHersteller() {
+    void addHersteller_shouldSucessful_whenHerstellerNochNichtVorhanden() {
         Automat automat = new Automat(10);
         HerstellerImpl hersteller = new HerstellerImpl("hi");
 
@@ -145,7 +149,7 @@ class AutomatTest {
     }
 
     @Test
-    void addHersteller_withMockito() {
+    void addHersteller_shouldSucessfull_whenHerstellerNochNichtVorhanden_withMockito() {
 
         Automat automat = new Automat(10);
         HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
@@ -154,7 +158,7 @@ class AutomatTest {
 
 
     @Test
-    void testDeleteHersteller() {
+    void deleteHersteller_shouldSucessful_whenHerstellerIsThere() {
         Automat automat = new Automat(10);
         HerstellerImpl hersteller = new HerstellerImpl("hi");
         automat.addHersteller(hersteller);
@@ -167,18 +171,42 @@ class AutomatTest {
     }
 
     @Test
-    void deleteHersteller_withMockito(){
+    void deleteHersteller_shouldSuccessful_whenHerstellerIsThere_withMockito() {
+        Automat automat = new Automat(10);
+        HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
+        HerstellerImpl herstellerMock2 = Mockito.mock(HerstellerImpl.class);
+
+        HerstellerImpl hersteller = automat.deleteHersteller(herstellerMock);
+
+        assertFalse(automat.getHerstellerListe().contains(herstellerMock2));
+
+    }
+
+    @Test
+    void deleteHersteller_shouldThrowError_whenThereIsNoHersteller_withMockito() {
         Automat automat = new Automat(10);
         HerstellerImpl herstellerMock = Mockito.mock(HerstellerImpl.class);
         HerstellerImpl hersteller = automat.deleteHersteller(herstellerMock);
         assertFalse(automat.getHerstellerListe().contains(hersteller));
+    }
 
+
+    @Test
+    void deleteHersteller_withSpy() {
+
+        HerstellerImpl herstellerSpy = spy(new HerstellerImpl("herstellerSpy"));
+
+        Automat spyAutomat = spy(new Automat(10));
+        spyAutomat.addHersteller(herstellerSpy);
+
+        // Verify that the Hersteller is no longer in the vending machine
+        assertFalse(spyAutomat.getHerstellerListe().contains(spyAutomat));
     }
 
 //test addkuchen
 
     @Test
-    void addKuchen_shouldSuccessfully_Add_whenValidKuchen() {
+    void addKuchen_shouldSuccessfully_whenValidKuchen() {
         Automat automat = new Automat(10);
         automat.addHersteller(new HerstellerImpl("hi"));
         String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
@@ -233,6 +261,7 @@ class AutomatTest {
 
     }
 
+
     //test delete kuchen
     @Test
     void deleteKuchenById_shouldThrowError_whenKuchenIsNotInAutomat() {
@@ -285,6 +314,7 @@ class AutomatTest {
         assertNotEquals(new Date(), kuchen.getInspektionsdatum());
     }
 
+
     @Test
     void getHerstellerUndKuchenanzahl_shouldSuccessful() {
 
@@ -300,6 +330,25 @@ class AutomatTest {
         assertTrue(result.containsKey(hersteller));
         assertEquals(2, result.get(hersteller));
     }
+
+    @Test
+    void getHerstellerUndKuchenanzahl_withMockito() {
+        Automat automat = new Automat(10);
+        HerstellerImpl herstellerMock = new HerstellerImpl("herstellerMock");
+        automat.addHersteller(herstellerMock);
+
+        KuchenImpl kuchenMock = Mockito.mock(KuchenImpl.class);
+
+        when(kuchenMock.getHersteller()).thenReturn(herstellerMock);
+
+        automat.getKuchenHashMap().put(0, kuchenMock);
+
+        HashMap<HerstellerImpl, Integer> herstellerUndKuchenanzahl = automat.getHerstellerUndKuchenanzahl();
+
+
+        assertEquals(1, herstellerUndKuchenanzahl.get(herstellerMock));
+    }
+
 
     @Test
     void getAllergenList() {

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DekoGui/DekoGui.iml" filepath="$PROJECT_DIR$/DekoGui/DekoGui.iml" />
       <module fileurl="file://$PROJECT_DIR$/Gui/Gui.iml" filepath="$PROJECT_DIR$/Gui/Gui.iml" />
       <module fileurl="file://$PROJECT_DIR$/belegProg3.iml" filepath="$PROJECT_DIR$/belegProg3.iml" />
       <module fileurl="file://$PROJECT_DIR$/cli/cli.iml" filepath="$PROJECT_DIR$/cli/cli.iml" />

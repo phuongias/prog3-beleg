@@ -31,12 +31,12 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [ ] Testabdeckung Rest (6)
   - [ ] Einfügen von Kund*innen über das CLI _cli_
   - [ ] Anzeigen von Kund*innen über das CLI _cli_
-  - [x] ein Beobachter _CapacityObserverTest(befindet sich in der DL im tst Ordner)_
+  - [x] ein Beobachter _CapacityObserver wird getestet(befindet sich in der DL im tst Ordner bei CapacityObserverTest)_
   - [ ] deterministische Funktionalität der Simulationen _getestete Klassen angeben_
-  - [ ] Speichern via JOS oder JBP _getestete Klassen angeben_
-  - [ ] Laden via JOS oder JBP _getestete Klassen angeben_
-- [ ] **mindestens 5 Unittests, die Mockito verwenden** (4)
-- [ ] mindestens 4 Spy- / Verhaltens-Tests (3)
+  - [x] Speichern via JOS oder JBP _JOS Klasse wird getestet (Tests befinden sich im io module bei tst)_
+  - [x] Laden via JOS oder JBP _JOS Klasse getestet_
+- [x] **mindestens 5 Unittests, die Mockito verwenden** (4)
+- [ ] mindestens 4 Spy- / Verhaltens-Tests (3) 
 - [x] **keine unbeabsichtigt fehlschlagenden Test** (1)
 
 ## Fehlerfreiheit (10)
@@ -77,5 +77,5 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 ## zusätzliche Anforderungen (10)
 - [x] Kuchen nach Dekoratormuster (4)
 - [x] korrekte Aggregationen (2)
-- [ ] Integration in CLI & GUI (4)
+- [ ] Integration in CLI & GUI (4) _cli befindet im cli module und GUI funktioniert nicht richtig, aber angefangen_
 

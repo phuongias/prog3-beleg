@@ -19,7 +19,6 @@ class CapacityObserverTest {
         String kuchen = "Obstkuchen hi 10.99 3294 PT12H Erdnuss Apfel";
         KuchenImpl result = automat.addKuchen(kuchen);
 
-        //überprüfen ob observer was ausgibt, wenn kuchen hinzugefügt
         assertDoesNotThrow(() -> {automat.notifyObserver();});
 
 

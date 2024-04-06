@@ -28,5 +28,6 @@
     </orderEntry>
     <orderEntry type="module" module-name="contract" />
     <orderEntry type="module" module-name="dekorationsmuster" />
+    <orderEntry type="library" name="mockito.core" level="project" />
   </component>
 </module>

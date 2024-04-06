@@ -216,13 +216,13 @@ public class Cli {
         System.out.println("allergene i - enhalten: ");
         String innerChoice4 = scanner.nextLine();
         switch (innerChoice4) {
-            case "allergene e":
+            case "allergene i":
                 AllergenVorhandenListEvent allergenListEvent = new AllergenVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenVorhandenListEventHandler.handle(allergenListEvent);
                 System.out.println();
                 break;
 
-            case "allergene i":
+            case "allergene e":
                 AllergenNichtVorhandenListEvent allerergenListEvent = new AllergenNichtVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenNichtVorhandenListEventHandler.handle(allerergenListEvent);
                 System.out.println();
@@ -245,7 +245,7 @@ public class Cli {
     }
 
     private void handlePersistenzmodus() {
-        System.out.println("Persistenzmodus ");
+        System.out.println("Persistenzmodus (nur JOS)" );
         System.out.println("saveJOS");
         System.out.println("loadJOS");
         String innerChoice4 = scanner.nextLine();

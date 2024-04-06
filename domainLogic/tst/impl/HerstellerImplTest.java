@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HerstellerImplTest {
 
+    //HerstellerImpl klasse wird getestet
+
     @Test
     public void testGetName() {
         String name = "Phuong";

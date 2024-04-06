@@ -9,6 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
+    //Parser klasse wird getestet
 
     @Test
     public void testParseKuchenInfo_Obstkuchen() {

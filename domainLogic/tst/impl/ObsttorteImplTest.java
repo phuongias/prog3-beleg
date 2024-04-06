@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ObsttorteImplTest {
+    //ObsttorteImpl klasse  wird getestet
 
     @Test
     void getKremsorte() {

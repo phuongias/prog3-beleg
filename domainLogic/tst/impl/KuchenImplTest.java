@@ -12,6 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class KuchenImplTest {
+    //KuchenImpl klasse wird getestet
 
     @Test
     void getKuchensorte() {

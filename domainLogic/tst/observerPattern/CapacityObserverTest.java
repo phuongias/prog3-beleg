@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 
 class CapacityObserverTest {
+    //CapacityObserver Klasse wird getestet
 
     @Test
     void testUpdate_shouldSuccessFull_whenIts90Percent() {

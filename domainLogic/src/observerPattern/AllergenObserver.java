@@ -1,4 +1,4 @@
-package observerPattern;
+/*package observerPattern;*/
 
 import automat.Automat;
 import kuchen.Allergen;

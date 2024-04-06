@@ -29,4 +29,10 @@ class AllergenObserverTest {
         assertDoesNotThrow(() -> {
             automat.notifyObserver();});
         */
-/*assertNotEquals(currentAllergenList, previousAllergenList);*
+/*assertNotEquals(currentAllergenList, previousAllergenList);*//*
+
+    }
+
+}
+
+*/

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DekoGui/DekoGui.iml" filepath="$PROJECT_DIR$/DekoGui/DekoGui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gui/Gui.iml" filepath="$PROJECT_DIR$/Gui/Gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/belegProg3.iml" filepath="$PROJECT_DIR$/belegProg3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cli/cli.iml" filepath="$PROJECT_DIR$/cli/cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contract/contract.iml" filepath="$PROJECT_DIR$/contract/contract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dekorationsmuster/dekorationsmuster.iml" filepath="$PROJECT_DIR$/dekorationsmuster/dekorationsmuster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domainLogic/domainLogic.iml" filepath="$PROJECT_DIR$/domainLogic/domainLogic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eventPattern/eventPattern.iml" filepath="$PROJECT_DIR$/eventPattern/eventPattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io/io.iml" filepath="$PROJECT_DIR$/io/io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/networking/networking.iml" filepath="$PROJECT_DIR$/networking/networking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domainLogic/src/observerPattern/observerPattern.iml" filepath="$PROJECT_DIR$/domainLogic/src/observerPattern/observerPattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parser/parser.iml" filepath="$PROJECT_DIR$/parser/parser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simulation/simulation.iml" filepath="$PROJECT_DIR$/simulation/simulation.iml" />
+    </modules>
+  </component>
+</project>

@@ -11,6 +11,7 @@ import observerPattern.Observable;
 import observerPattern.Observer;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.*;
 
 
@@ -247,6 +248,8 @@ public class Automat implements Serializable, Observable {
     public int getMaxkapazitaet() {
         return maxkapazitaet;
     }
+    // Methode zur Umwandlung einer Duration in Tage
+
 
 
     //Observer
@@ -275,4 +278,3 @@ public class Automat implements Serializable, Observable {
 
 
 }
-  

@@ -9,16 +9,15 @@ public class JBPIoMain {
 
         Automat automat = new Automat(10);
 
-        String filepath = "automat.jbp";
 
         try {
             // Automaten speichern
-            if (JBP.saveJBP(filepath, automat)) {
+            if (JBP.saveJBP(automat)) {
                 System.out.println("Automat erfolgreich gespeichert.");
             }
 
             // Automaten laden
-            Automat geladenerAutomat = JBP.loadJBP(filepath);
+            Automat geladenerAutomat = JBP.loadJBP();
             if (geladenerAutomat != null) {
                 System.out.println("Automat erfolgreich geladen.");
             } else {

@@ -70,7 +70,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [ ] data binding verwendet (1)
 - [x] Änderung der Fachnummer mittels drag&drop (1)
 - [ ] Einfügen von Kuchen via GUI erfolgt nebenläufig (1)
-- [ ] sowohl JBP als auch JOS (2)
+- [x] sowohl JBP als auch JOS (2)
 - [ ] sowohl TCP als auch UDP (1)
 - [ ] Server unterstützt konkurierende Clients für TCP oder UDP (2)
 

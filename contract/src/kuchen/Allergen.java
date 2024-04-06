@@ -1,7 +1,7 @@
 package kuchen;
 
 public enum Allergen {
-    Gluten, Erdnuss, Haselnuss, Sesamsamen,Laktose, Fructose;
+    Gluten, Erdnuss, Haselnuss, Sesamsamen,Laktose, Fructose
 
 }
 

@@ -22,10 +22,10 @@ public class JOS {
             out.writeObject(automat);
             out.close();
             fileOutput.close();
-            System.out.println("Automat gespeichert.");
+            //System.out.println("Automat gespeichert.");
             return true;
         }catch (IOException e){
-            System.err.println("Fehler beim Speichern des Automaten: " + e.getMessage());
+            //System.err.println("Fehler beim Speichern des Automaten: " + e.getMessage());
             return false;
         }
     }
@@ -38,10 +38,10 @@ public class JOS {
             automat = (Automat) in.readObject();
             in.close();
             fileInput.close();
-            System.out.println("Automat erfolgreich geladen.");
+            //System.out.println("Automat erfolgreich geladen.");
             return automat;
         }catch(IOException e){
-            System.err.println("Fehler beim Laden des Automaten: " + e.getMessage());
+            //System.err.println("Fehler beim Laden des Automaten: " + e.getMessage());
             return null;
         }
     }

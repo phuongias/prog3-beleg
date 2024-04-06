@@ -19,11 +19,21 @@ import eventPattern.herstellerHandler.HerstellerAddEventHandler;
 import eventPattern.herstellerHandler.HerstellerDeleteEventHandler;
 import eventPattern.herstellerHandler.HerstellerReadEventHandler;
 import automat.Automat;
+import eventPattern.persistentEvent.LoadJbpPersistenzEvent;
+import eventPattern.persistentEvent.LoadJosPersistenzEvent;
+import eventPattern.persistentEvent.SaveJbpPersistenzEvent;
+import eventPattern.persistentEvent.SaveJosPersistenzEvent;
+import eventPattern.persistenzHandler.LoadJbpPersistenzEventHandler;
+import eventPattern.persistenzHandler.LoadJosPersistenzEventHandler;
+import eventPattern.persistenzHandler.SaveJbpPersistenzEventHandler;
+import eventPattern.persistenzHandler.SaveJosPersistenzEventHandler;
+import eventPattern.persistenzListener.LoadJbpPersistenzEventListener;
 import impl.HerstellerImpl;
 import impl.KuchenImpl;
 import io.JOS;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -45,6 +55,10 @@ public class Cli {
 
     private AllergenVorhandenListEventHandler allergenVorhandenListEventHandler;
     private AllergenNichtVorhandenListEventHandler allergenNichtVorhandenListEventHandler;
+    private SaveJosPersistenzEventHandler saveJosPersistenzEventHandler;
+    private LoadJosPersistenzEventHandler loadJosPersistenzEventHandler;
+    private SaveJbpPersistenzEventHandler saveJbpPersistenzEventHandler;
+    private LoadJbpPersistenzEventHandler loadJbpPersistenzEventHandler;
 
     private Scanner scanner;
 
@@ -94,8 +108,8 @@ public class Cli {
     private void handleEinfuegemodus() {
         System.out.println("Einfügemodus");
         System.out.println("Auswahl treffen:");
-        System.out.println("hersteller");
-        System.out.println("kuchen");
+        System.out.println("hersteller - für hersteller hinzufügen");
+        System.out.println("kuchen - für kuchen hinzuzufügen");
 
         String choice = scanner.nextLine();
 
@@ -174,16 +188,16 @@ public class Cli {
         System.out.println("allergene - Allergenliste anzeigen: ");
         String innerChoice3 = scanner.nextLine();
         switch (innerChoice3) {
-            case "kuchen":
+            case ":k":
                 handleKuchenAnzeigen();
                 break;
 
-            case "hersteller":
+            case ":h":
                 handleHerstellerAnzeigen();
                 break;
 
 
-            case "allergene":
+            case ":a":
                 handleAllergenAnzeigen();
                 break;
 
@@ -211,17 +225,17 @@ public class Cli {
 
     private void handleAllergenAnzeigen() {
         System.out.println("Allergenliste: ");
-        System.out.println("allergene e - nicht enthalten:");
-        System.out.println("allergene i - enhalten: ");
+        System.out.println(":e - nicht enthalten:");
+        System.out.println(":i - enhalten: ");
         String innerChoice4 = scanner.nextLine();
         switch (innerChoice4) {
-            case "allergene i":
+            case ":i":
                 AllergenVorhandenListEvent allergenListEvent = new AllergenVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenVorhandenListEventHandler.handle(allergenListEvent);
                 System.out.println();
                 break;
 
-            case "allergene e":
+            case ":e":
                 AllergenNichtVorhandenListEvent allerergenListEvent = new AllergenNichtVorhandenListEvent(automat, automat.getKuchenHashMap());
                 allergenNichtVorhandenListEventHandler.handle(allerergenListEvent);
                 System.out.println();
@@ -243,10 +257,12 @@ public class Cli {
 
     }
 
-    private void handlePersistenzmodus() {
-        System.out.println("Persistenzmodus (nur JOS)" );
+    private void handlePersistenzmodus() throws IOException {
+        System.out.println("Persistenzmodus (nur JOS)");
         System.out.println("saveJOS");
         System.out.println("loadJOS");
+        System.out.println("saveJBP");
+        System.out.println("loadJBP");
         String innerChoice4 = scanner.nextLine();
         switch (innerChoice4) {
             case "saveJOS":
@@ -256,30 +272,46 @@ public class Cli {
             case "loadJOS":
                 handleLoadJos();
                 break;
+
+            case "saveJBP":
+                handleSaveJbp();
+                break;
+            case "loadJBP":
+                handleLoadJbp();
+                break;
         }
     }
+
 
 
 
     private void handleSaveJos() {
-        if (jos.saveDL(automat)) {
-            System.out.println("Automat erfolgreich gespeichert.");
-        } else {
-            System.out.println("Fehler beim Speichern des Automaten.");
-        }
-        System.out.println(automat.getKuchenHashMap());
+        SaveJosPersistenzEvent saveJosPersistenzEvent = new SaveJosPersistenzEvent(automat);
+        saveJosPersistenzEventHandler.handle(saveJosPersistenzEvent);
+        System.out.println();
     }
+
 
     private void handleLoadJos() {
-        Automat loadedAutomat = null;
-        try {
-            loadedAutomat = jos.loadDL();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        LoadJosPersistenzEvent loadJosPersistenzEvent = new LoadJosPersistenzEvent(automat);
+        loadJosPersistenzEventHandler.handle(loadJosPersistenzEvent);
+        System.out.println();
 
-        System.out.println(loadedAutomat.getKuchenHashMap());
     }
+    private void handleSaveJbp() throws IOException {
+        SaveJbpPersistenzEvent saveJbpPersistenzEvent = new SaveJbpPersistenzEvent(automat);
+        saveJbpPersistenzEventHandler.handle(saveJbpPersistenzEvent);
+        System.out.println();
+
+
+    }
+    private void handleLoadJbp() throws IOException {
+        LoadJbpPersistenzEvent loadJbpPersistenzEvent = new LoadJbpPersistenzEvent(automat);
+        loadJbpPersistenzEventHandler.handle(loadJbpPersistenzEvent);
+
+
+    }
+
 
 
     public void setCakeAddEventHandler(CakeAddEventHandler cakeAddEventHandler) {
@@ -317,6 +349,19 @@ public class Cli {
     public void setAllergenNichtVorhandenListEventHandler(AllergenNichtVorhandenListEventHandler allergenNichtVorhandenListEventHandler) {
         this.allergenNichtVorhandenListEventHandler = allergenNichtVorhandenListEventHandler;
     }
+    public void setSaveJosPersistenzEventHandler(SaveJosPersistenzEventHandler saveJosPersistenzEventHandler){
+        this.saveJosPersistenzEventHandler = saveJosPersistenzEventHandler;
+    }
+
+    public void setLoadJosPersistenzEventHandler(LoadJosPersistenzEventHandler loadJosPersistenzEventHandler){
+        this.loadJosPersistenzEventHandler = loadJosPersistenzEventHandler;
+    }
+
+    public void setSaveJbpPersistenzEventHandler(SaveJbpPersistenzEventHandler saveJbpPersistenzEventHandler){
+        this.saveJbpPersistenzEventHandler = saveJbpPersistenzEventHandler;
+    }
+
+    public void setLoadJbpPersistenzEventHandler(LoadJbpPersistenzEventHandler loadJbpPersistenzEventHandler){
+        this.loadJbpPersistenzEventHandler = loadJbpPersistenzEventHandler;
+    }
 }
-
-

@@ -6,6 +6,7 @@ import kuchen.Allergen;
 import java.util.HashSet;
 
 
+/*
 public class AllergenObserver implements Observer {
 
     private Automat automat;
@@ -34,6 +35,6 @@ public class AllergenObserver implements Observer {
         }
     }
 
-
 }
 
+*/

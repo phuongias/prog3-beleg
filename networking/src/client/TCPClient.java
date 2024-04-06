@@ -45,7 +45,7 @@ public class TCPClient {
         try {
             char sign = this.in.readChar();
             Object event = this.in.readObject();
-            // Verarbeite das empfangene Event
+
             if(cakeReadEventHandler != null){
                 cakeReadEventHandler.handle((CakeReadEvent) event);
 
@@ -61,7 +61,6 @@ public class TCPClient {
             in.close();
             out.close();
         } catch (IOException ignored) {
-            // Behandlung der IOException, falls erforderlich
         }
     }
 }

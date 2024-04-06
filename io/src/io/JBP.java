@@ -6,11 +6,14 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 
-public class JBP {
+public class JBP implements Serializable{
 
-    public static boolean saveJBP(String filepath, Automat automat) throws IOException {
 
-        try (FileOutputStream fileOutput = new FileOutputStream(filepath);
+    //Serialisierung mit JBP
+    //Quellen: https://openbook.rheinwerk-verlag.de/java8/07_010.html
+    public static boolean saveJBP( Automat automat) throws IOException {
+
+        try (FileOutputStream fileOutput = new FileOutputStream("Automat.jbp");
              XMLEncoder encoder = new XMLEncoder(fileOutput)) {
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -27,8 +30,8 @@ public class JBP {
         }
     }
 
-    public static Automat loadJBP(String filepath) throws IOException {
-        try (FileInputStream fileInput = new FileInputStream(filepath);
+    public static Automat loadJBP() throws IOException {
+        try (FileInputStream fileInput = new FileInputStream("Automat.jbp");
              XMLDecoder customerDecoder = new XMLDecoder(fileInput)) {
 
             byte[] serializedData = (byte[]) customerDecoder.readObject();

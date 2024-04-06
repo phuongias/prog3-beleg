@@ -10,5 +10,6 @@
     <orderEntry type="module" module-name="domainLogic" />
     <orderEntry type="module" module-name="parser" />
     <orderEntry type="module" module-name="contract" />
+    <orderEntry type="module" module-name="io" />
   </component>
 </module>

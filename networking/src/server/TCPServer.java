@@ -82,8 +82,8 @@ public class TCPServer {
             clientSocket.close();
             in.close();
             out.close();
-        } catch (IOException ignored) {
-            // Behandlung der IOException, falls erforderlich
+        } catch (IOException e) {
+
         }
     }
 

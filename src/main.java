@@ -22,8 +22,17 @@ import eventPattern.herstellerListener.HerstellerAddEventListener;
 import eventPattern.herstellerListener.HerstellerDeleteEventListener;
 import eventPattern.herstellerListener.HerstellerReadEventListener;
 import automat.Automat;
+import eventPattern.persistentEvent.SaveJosPersistenzEvent;
+import eventPattern.persistenzHandler.LoadJbpPersistenzEventHandler;
+import eventPattern.persistenzHandler.LoadJosPersistenzEventHandler;
+import eventPattern.persistenzHandler.SaveJbpPersistenzEventHandler;
+import eventPattern.persistenzHandler.SaveJosPersistenzEventHandler;
+import eventPattern.persistenzListener.LoadJbpPersistenzEventListener;
+import eventPattern.persistenzListener.LoadJosPersistenzEventListener;
+import eventPattern.persistenzListener.SaveJbpPersistenzEventListener;
+import eventPattern.persistenzListener.SaveJosPersistenzEventListener;
 import io.JOS;
-import observerPattern.AllergenObserver;
+/*import observerPattern.AllergenObserver;*/
 import observerPattern.CapacityObserver;
 
 
@@ -35,7 +44,7 @@ public class main {
 
         Automat automat = new Automat(10);
         CapacityObserver c1 = new CapacityObserver(automat);
-        AllergenObserver a1 = new AllergenObserver(automat);
+        //AllergenObserver a1 = new AllergenObserver(automat);
 
         //automat.addHersteller(new HerstellerImpl("hi"));
 
@@ -111,6 +120,31 @@ public class main {
         AllergenNichtVorhandenListEventListener allergenNichtVorhandenListEventListener = new AllergenNichtVorhandenListEventListener(automat);
         allergenNichtVorhandenListEventHandler.addListener(allergenNichtVorhandenListEventListener);
         console.setAllergenNichtVorhandenListEventHandler(allergenNichtVorhandenListEventHandler);
+
+        //JOS / JOS
+        //JOS
+        SaveJosPersistenzEventHandler saveJosPersistenzEventHandler = new SaveJosPersistenzEventHandler();
+        SaveJosPersistenzEventListener saveJosPersistenzEventListener = new SaveJosPersistenzEventListener(automat);
+        saveJosPersistenzEventHandler.addListener(saveJosPersistenzEventListener);
+        console.setSaveJosPersistenzEventHandler(saveJosPersistenzEventHandler);
+
+        LoadJosPersistenzEventHandler loadJosPersistenzEventHandler = new LoadJosPersistenzEventHandler();
+        LoadJosPersistenzEventListener loadJosPersistenzEventListener = new LoadJosPersistenzEventListener(automat);
+        loadJosPersistenzEventHandler.addListener(loadJosPersistenzEventListener);
+        console.setLoadJosPersistenzEventHandler(loadJosPersistenzEventHandler);
+
+        SaveJbpPersistenzEventHandler saveJbpPersistenzEventHandler = new SaveJbpPersistenzEventHandler();
+        SaveJbpPersistenzEventListener saveJbpPersistenzEventListener = new SaveJbpPersistenzEventListener(automat);
+        saveJbpPersistenzEventHandler.addListener(saveJbpPersistenzEventListener);
+        console.setSaveJbpPersistenzEventHandler(saveJbpPersistenzEventHandler);
+
+        LoadJbpPersistenzEventHandler loadJbpPersistenzEventHandler = new LoadJbpPersistenzEventHandler();
+        LoadJbpPersistenzEventListener loadJbpPersistenzEventListener = new LoadJbpPersistenzEventListener(automat);
+        loadJbpPersistenzEventHandler.addListener(loadJbpPersistenzEventListener);
+        console.setLoadJbpPersistenzEventHandler(loadJbpPersistenzEventHandler);
+
+
+
 
         console.execute();
 
